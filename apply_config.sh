@@ -3,9 +3,9 @@
 # Variables
 UUID=$(kenv smbios.system.uuid)  # Get the device's UUID
 DEVICE_ID=$(echo -n "$UUID" | md5)  # Generate MD5 hash of the UUID
-CONFIG_URL="https://raw.githubusercontent.com/yourusername/pfSense-configs/main/devices/${DEVICE_ID}/config.xml"
+CONFIG_URL="https://raw.githubusercontent.com/custm-es/update_script/main/devices/${DEVICE_ID}/config.xml"
 TEMP_FILE="/tmp/${DEVICE_ID}-config.xml"
-CURRENT_CONFIG="/cf/conf/config.xml"
+CURRENT_CONFIG="/conf/config.xml"  # Updated to the correct path
 LOG_FILE="/var/log/config_update.log"
 
 # Function to log messages
@@ -37,8 +37,8 @@ require_once("config.inc");
 require_once("functions.inc");
 require_once("services.inc");
 
-$config_file = "${TEMP_FILE}";
-$config = parse_config(true, true, $config_file);
+\$config_file = "/tmp/${DEVICE_ID}-config.xml";
+\$config = parse_config(true, true, \$config_file);
 
 if (\$config === false) {
     file_put_contents("/var/log/config_update.log", date('Y-m-d H:i:s') . " - Error: Invalid configuration file format.\n", FILE_APPEND);
