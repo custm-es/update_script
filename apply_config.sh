@@ -1,8 +1,13 @@
 #!/bin/sh
 
 # Variables
-UUID=$(kenv smbios.system.uuid)  # Get the device's UUID
-DEVICE_ID=$(echo -n "$UUID" | md5)  # Generate MD5 hash of the UUID
+# Obtener las direcciones MAC de las dos primeras interfaces de red
+MAC1=$(ifconfig | grep -m 1 ether | sed 's/.*ether //;s/ .*//')
+MAC2=$(ifconfig | grep -m 2 ether | tail -n 1 | sed 's/.*ether //;s/ .*//')
+
+COMBINED_MAC="${MAC1}${MAC2}" # Combine the two MAC addresses
+
+DEVICE_ID=$(echo -n "$COMBINED_MAC" | md5) # Generate MD5 hash of the MAC COMBINATION
 CONFIG_URL="https://raw.githubusercontent.com/custm-es/update_script/main/devices/${DEVICE_ID}/config.xml"
 TEMP_FILE="/tmp/${DEVICE_ID}-config.xml"
 CURRENT_CONFIG="/conf/config.xml"  # Updated to the correct path
