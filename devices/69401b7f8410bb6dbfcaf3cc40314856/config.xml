@@ -359,6 +359,39 @@
 		</rule>
 		<rule>
 			<id></id>
+			<tracker>1739799304</tracker>
+			<type>pass</type>
+			<interface>wan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<protocol>tcp</protocol>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<network>wan</network>
+				<port>3000</port>
+			</destination>
+			<descr></descr>
+			<created>
+				<time>1739799304</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</created>
+			<updated>
+				<time>1739799512</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</updated>
+		</rule>
+		<rule>
+			<id></id>
 			<tracker>1737126594</tracker>
 			<type>pass</type>
 			<interface>lan</interface>
@@ -591,13 +624,15 @@
 	<wol></wol>
 	<rrd>
 		<enable></enable>
+		<category>left=system-processor&amp;right=&amp;resolution=300&amp;timePeriod=-1d&amp;startDate=&amp;endDate=&amp;startTime=0&amp;endTime=0&amp;graphtype=line&amp;invert=true&amp;refresh-interval=0</category>
 	</rrd>
 	<widgets>
 		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show</sequence>
 		<period>10</period>
 	</widgets>
 	<openvpn></openvpn>
-	<dnshaper></dnshaper>
+	<dnshaper>
+	</dnshaper>
 	<unbound>
 		<enable></enable>
 		<dnssec></dnssec>
@@ -611,13 +646,15 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1739721950</time>
-		<description><![CDATA[(system): Installed ntopng package.]]></description>
-		<username><![CDATA[(system)]]></username>
+		<time>1739799512</time>
+		<description><![CDATA[custm@192.168.1.135 (Local Database): Firewall: Rules - saved/edited a firewall rule.]]></description>
+		<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
 	</revision>
-	<gateways></gateways>
+	<gateways>
+	</gateways>
 	<captiveportal></captiveportal>
-	<shaper></shaper>
+	<shaper>
+	</shaper>
 	<dnsmasq></dnsmasq>
 	<ntpd>
 		<gps></gps>
@@ -749,7 +786,19 @@
 			<certificates></certificates>
 		</acme>
 		<ntopng>
-			<config></config>
+			<config>
+				<enable>on</enable>
+				<keepdata>on</keepdata>
+				<redis_password>pfsense</redis_password>
+				<redis_passwordagain>pfsense</redis_passwordagain>
+				<interface_array>wan</interface_array>
+				<dns_mode>0</dns_mode>
+				<local_networks>custom</local_networks>
+				<row>
+					<cidr>192.168.1.1/24</cidr>
+				</row>
+				<maxmind_key></maxmind_key>
+			</config>
 		</ntopng>
 		<service>
 			<name>ntopng</name>
@@ -1004,4 +1053,22 @@
 			<mode>advanced</mode>
 		</outbound>
 	</nat>
+	<sshdata>
+		<sshkeyfile>
+			<filename>ssh_host_rsa_key</filename>
+			<xmldata>ldfHrqxKsgbgOU9x5ugICs8QT+G9m+G9raIwT9+1tu6drZZ6p4SUUsIk49NPxL//fhcrSE/jH9MSDNeV/7GcZ8B4wj+qEP8c/gtkKDtkk3Gn3GNLov5ddALzs1gJ/2Sj/7MVspHeE5v5/8V+H048frbFnSP1O58Ao/lzdHw//nmxFpjmw79bZmzzOHm9rkZm3046wXPM4nLlKSCBK20nfpKsukJDjn1KN9YT2LPn3mwN6CP51dsDPpezefK+Rkr2EAjM3QSQXb6gumJnR0XGEybv06cS2KUg3uqoBS1lMuIBuas6k8LVD95EZxYe5DIvl9Ix1/pGUxxFFKfQinKYEX42CJXbyw/xfi9wTBQi48BRyPV6ebFAc9Jy+Xw9GE/MHgX9npvtcbDDcqRPerUJUqAaFJosJS2RNphbLSo1EXL1Su3W3ugpNw1MEfEAJOlGPsueFWRrDFuXmYU8qPcdRPlyZ5QlLuhwJtFxY7n5TnZnC7ok1qiaqdHCpXcj9htvYmMA2eKa3R6lYlCVDWlPzxw6qwgDihblBwExM4rDpw5dUsYm4sOjj9uGeATyagsfcW4i25VL3zxQbeeL7ZS+yNMbrWmDblJbN8+Zv1ZshUcXf5ZUfYtXsHISftjLcE+9GyYrvn9IOxl7VZRFNASuq3XRXQdpGWPToKT6dlaDYkdtJJghjEqZdzWkW6AoY5YydH3Obr032rt6VU5/P/UVIkxxRQG3JUXnYiTWiRTRNaF2z9o2HjF1a+qdHdZdTi5iuee+q/qHo5mGpilbtsDVIWGVQHSwMN7VBMzbY+qNO9f7YdPgPZHL1nPcM8qJcEBmM3Jn30qnrZ4PMkanK2QtiDv1tKzeOfuC2YJSIujoAeqHtL2YisirXuvYf4zLOWrMWqTc8f8oG/iN9t/LBn6j/feygd9o/71s4Dfafy8b+I3238sGfqP997KB32j/vWzgN9p/Lxv4jfbfywZ+o/0jm+G/2fwnvL+o6Wfqflq5kIRCsMIu+NijbrMWBR6EwaqHeQDi4aUEbBhR4zo6oSa4JYqjueoJV5xPb14YJxf96tETOi/bpxlIx0MRHmaN+LBKmV2kywb3eQD2yZ/R3jUC+4r1jW5fzRUzBv3YQoupKzlvqhLCyHzJq92RktBXzS0z5/7grZlcmSd2j9A668BxeyDdCSlnVvaklTDP+Y4WGe26xhiFqQNlE7mwD+kwV59ur0Pkg8SdXx+YyfO4xfGHHwc8DXzvySaeMQsZkJg0a7FOXsOLnMkivg0uhDTvzBL2sB7ojpXanw817hwNgf79KKITlqWiuKRdAyqrZ1+vXUOy2IXnJpY/ir+GoKfH7klQL9/fOqax0yXCq5D/kBCaYyIXEaEynAHtR8YH7DioBpggxfEOhK/EdJVNUeNhFS0hXbMAgjXaYyOnSxCItFasZ+NBaJjCJST0tfUPA8OcvESCQd19ACEhBOPGgV/kbxWeH4J3y0uUQyluOWOFY3CNz/Lr6ryuY4NvjZfg2lDq8m7CZ8LWVPsK3hINiCWLapd7T3cbwTPzsL7VzWk3PQsC5KceP6GJqLEmhNUZTAU6LilqFAhLGjuq/uR7jS/pNacATmyv+43zZGXw3zqm7DdZ7hglBCZF9OwOuP3mPFPfe96WXNgmQds1KoW4yTMo1aLoTQ5ahhS4P61loqtqSuFTDsQrVv60HuI9TZ6pvl3jLA6CVTgXTdpWYOm12x1wf+QFYeW7Bz5RGlbdDaBGQ0jtPCDgHsM9Y366nwC9sc/UQfLDdcKBimXWaJ4opKexcLTtDYdLazro4GN2xzU+KnTjC+Df2mrPcAMhFOppYDeolmUOeItsIeluxXP1wtfLFK4OwdH0acCXu/bcsD+uVsdpcJ64VF7TFjig660s5JoRsINBg9wx0nD19caCpq2vW+sXwSsm4/czyxWOphObaK5got+taBOdh5yjXUIWBoje7hPWW2FL8E6qSRbUwGRju83FxbwWWEgi9vJC7PFBDO/bn7G9JPrdZIg7obYNywwgQiveDUhujPE2Q4EWagnd86fVYxltw6NTLGA3P44PsVV5REE9SvrTBhXYiLhsZESLNI2qUIlpW8A60Lxx6N04xpKT+h6AGU9fUJt3C4amBjuykNTzbrilRd1myelRcB2/cXxeKkI4yuKlyGX5GIsMKOBvTnj4OcZnM4LxA4QtcqE/Ea69uybb1kbS2eIj028v1PJxcF7YsVHGNV+pWrHUQVrm2wxXoAoI/5GftMFhN/tAFxXf9jG4LUdri6Ru/Rd33XMlFMhlpGkqdslxhjy3FIZGZHudQmtOQzAM9CA9NGiqfXa2eRA+Ao+ltCUoxKMXQZBVnkveLVBMflTHHKOdZuckyIOjqVcZ9qLGx33xrwoGqImFYy4z3gQO5f93wR3HCASYrKllofTSN739AKmeQ7BvBNUNeJ9wTfapu7AUP7qc96JOoEfIPsrSUNBp1B9ukzZSH0SDsnDvCw7Mk+YodYaC7DjuUtS/TUqph1iNKHSdkAUiRa3+oXgEsJBl2c8GflmyTK+fXSafSj+tZs3QjkEqVt3iccciGJwypVZe99BiatkUK17REaspySmlcmIBfCVNwVZMQzpRInJqdZSuhGl9uxM9KaF6ok/SFXj8AN36wn1BS47drXg1bCxpHkM6daQ2XXyAn8jHi8s2Nka5gJjinoLf2hg7vOZfuGpBfX/qR/x0HNsuMxch9GKLhfHzzRinXZtCZoVg4WEAQxBrTK8WHvufn1yYj/SnENgjGYyfyWbQxuaThf4eR8oR2wLHHLYI/Bl+BIP/74PRfwA=</xmldata>
+		</sshkeyfile>
+		<sshkeyfile>
+			<filename>ssh_host_rsa_key.pub</filename>
+			<xmldata>Fce3kptQAEDR3l+xPWOTU7EzJj6RQSBAdCAyIj5E+nqvb3PmQlj/XmD6JfwkkvaVSvj5IpT/KwueIP4oCZ4EOIfQpFQ/6v68DOUFcHUu/bq6dTlvDezS9YYV8e8V1Z9YXgf7TiyAhg0DPjc6SC7jLsV9zVSsYnsbTKTw4cmOGvMicyEiB2plSbNbsLlqcAx38+IsxD2HnCrXl1XYiMVe3Yz2aqmumfzpm0HrLdmYyXwZyudbxVacidqnU5HjaNAMOhPEcG8n7CHe7vnT8A5WA7cbllPN9RCtcAtJgmjAFgsgGsSxJSZ5gcF5K5EX957YVI8abc0pGPPawc3O7BHBoU8PKk7cpHee9gprlBegAEQaoll8knaYn4O97Vw0FLH6LmW33hm8p8Ea2e9qOwVJznGToPDaV52X2qZrI4AtpDry4GUO1hYTWTyexBf2KOOFk9pyCJQL1RKodnHokrItc27GOwLaZ51RfoxRnzEb2cAOrP6OH4tbyBhJqJOws6ByjaVZ/MTsavaUrViPRi0bRKmPneKuJ/3SM+gq9qk3Pl5xnpmGbhbUxWJlpU4he/pGNYUEm8tJ1KLtMUo4Es7ro+uTdZQJGdSGxCgfHDl4EFjVuaAjFS25YcLwpglPVX11ocYiBv0x9Car5g+QKBDNVD6Y8+A0vo0EoQIpDMJ+/Qx3VMhqLphdz89spGi2qPBIez/9CG4+3eWMbqumml9TGqcVnRu1x8/FR2rltS1K/amgnKkcE43gO7g8ldzfJSoF+/f31zKO69+p9IsBFn/qsS/+pMuU/voH</xmldata>
+		</sshkeyfile>
+		<sshkeyfile>
+			<filename>ssh_host_ed25519_key</filename>
+			<xmldata>nZDLboMwFET3fEX2UZQEcBKWGBtwCSbGpATvaqjy4JEmkAd8fetKXXTRTWcxutJcHY1mMvkSxB6ho2iDKef+aBOTVzvBowBnKpxo0oCVbOjw5syvYld2xQnbStADd1lv1Yllbd0Es38ElYUP5d2Q6/tOpBrrabJ9RurJgTcOV6bQubfhi2NXFo+q3X3gEDiW2YGZsIE5vjGxRIdBMQLUJi5aLvGTaeNf1P9CNVUa6V7W1UW5l9zVZ/QEpoRcTYutLtW0ImYbpeeARqbbA5QC4g+HRpDMWl8CPTac9PleMm0o18bRaOISNacFgE0b+aHq5zYvd2nEdu6JRKRgEBycpT6v1rXb5x6G9j7EkGW+9j0xpujv+T8B</xmldata>
+		</sshkeyfile>
+		<sshkeyfile>
+			<filename>ssh_host_ed25519_key.pub</filename>
+			<xmldata>Ky7O0E1NMTI1NbRUcAQCZ2O/qkRnw5woF09DvxBXU5CYp7upp0dVRl6UZ6SlT6G3UZCxc3hFanZgVbaPcaZxXlC2S16WmalTXrG/h69CUX5+iUNBWnBqXnGqXkZ+bqpeYlFBIhcA</xmldata>
+		</sshkeyfile>
+	</sshdata>
 </pfsense>
