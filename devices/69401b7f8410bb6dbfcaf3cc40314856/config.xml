@@ -6,7 +6,6 @@
 		<optimization>normal</optimization>
 		<hostname>pfSense</hostname>
 		<domain>home.arpa</domain>
-		<dnsallowoverride>on</dnsallowoverride>
 		<group>
 			<name>all</name>
 			<description><![CDATA[All Users]]></description>
@@ -49,7 +48,34 @@
 			<webguicss>pfSense.css</webguicss>
 			<uid>2000</uid>
 		</user>
-		<nextuid>2001</nextuid>
+		<user>
+			<scope>user</scope>
+			<bcrypt-hash>$2y$10$FGIpDlRBiuEwORFn76HyT.8bncdKloH1nRdojFVMtwiaDzPC36jkm</bcrypt-hash>
+			<descr><![CDATA[CUSTM custumer]]></descr>
+			<name>customer</name>
+			<expires></expires>
+			<dashboardcolumns>2</dashboardcolumns>
+			<authorizedkeys></authorizedkeys>
+			<ipsecpsk></ipsecpsk>
+			<customsettings></customsettings>
+			<webguicss>pfSense.css</webguicss>
+			<uid>2001</uid>
+			<priv>page-dashboard-all</priv>
+			<priv>page-system-login-logout</priv>
+			<priv>page-diagnostics-packetcapture</priv>
+			<priv>page-diagnostics-statessummary</priv>
+			<priv>page-status-gateways</priv>
+			<priv>page-status-interfaces</priv>
+			<priv>page-status-ipsec</priv>
+			<priv>page-status-openvpn</priv>
+			<priv>page-diagnostics-logs-firewall-dynamic</priv>
+			<priv>page-diagnostics-logs-firewall-summary</priv>
+			<priv>page-status-systemlogs-openvpn</priv>
+			<priv>page-status-systemlogs-routing</priv>
+			<priv>page-status-trafficgraph</priv>
+			<priv>page-diagnostics-logs-firewall</priv>
+		</user>
+		<nextuid>2002</nextuid>
 		<nextgid>2000</nextgid>
 		<timeservers>2.pfsense.pool.ntp.org</timeservers>
 		<webgui>
@@ -59,6 +85,9 @@
 			<dashboardcolumns>2</dashboardcolumns>
 			<max_procs>2</max_procs>
 			<roaming>enabled</roaming>
+			<webguicss>pfSense.css</webguicss>
+			<logincss>1e3f75;</logincss>
+			<althostnames> 192.168.2.1 192.168.2.1</althostnames>
 		</webgui>
 		<disablenatreflection>yes</disablenatreflection>
 		<disablesegmentationoffloading></disablesegmentationoffloading>
@@ -80,6 +109,9 @@
 		<serialspeed>115200</serialspeed>
 		<primaryconsole>video</primaryconsole>
 		<pkg_repo_conf_path>/usr/local/etc/pfSense/pkg/repos/pfSense-repo-2.7.2.conf</pkg_repo_conf_path>
+		<language>en_US</language>
+		<dnsallowoverride>on</dnsallowoverride>
+		<dns1host></dns1host>
 	</system>
 	<interfaces>
 		<wan>
@@ -107,8 +139,8 @@
 	<dhcpd>
 		<lan>
 			<range>
-				<from>192.168.2.100</from>
-				<to>192.168.2.200</to>
+				<from>192.168.2.10</from>
+				<to>192.168.2.245</to>
 			</range>
 			<enable></enable>
 			<failover_peerip></failover_peerip>
@@ -158,6 +190,108 @@
 	</syslog>
 	<filter>
 		<rule>
+			<ipprotocol>inet</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_PRI1_v4 auto rule]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_PRI1_v4</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1740668407</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>wan</interface>
+			<tracker>1770009632</tracker>
+		</rule>
+		<rule>
+			<ipprotocol>inet</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_PRI1_v4 auto rule]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_PRI1_v4</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1740668407</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>openvpn</interface>
+			<tracker>1770004953</tracker>
+		</rule>
+		<rule>
+			<id></id>
+			<tracker>1740646842</tracker>
+			<type>pass</type>
+			<interface>wan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<protocol>tcp</protocol>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<any></any>
+				<port>22</port>
+			</destination>
+			<log></log>
+			<descr><![CDATA[Acceso remoto]]></descr>
+			<created>
+				<time>1740646842</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</created>
+			<updated>
+				<time>1740648462</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</updated>
+		</rule>
+		<rule>
+			<id></id>
+			<tracker>1739886308</tracker>
+			<type>pass</type>
+			<interface>wan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<protocol>tcp</protocol>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<any></any>
+			</destination>
+			<descr></descr>
+			<updated>
+				<time>1739886308</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</updated>
+			<created>
+				<time>1739886308</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</created>
+		</rule>
+		<rule>
 			<id></id>
 			<tracker>1737131873</tracker>
 			<type>pass</type>
@@ -190,6 +324,7 @@
 				<time>1737131873</time>
 				<username><![CDATA[custm@192.168.1.129 (Local Database)]]></username>
 			</created>
+			<disabled></disabled>
 		</rule>
 		<rule>
 			<id></id>
@@ -227,70 +362,6 @@
 		</rule>
 		<rule>
 			<id></id>
-			<tracker>1737126683</tracker>
-			<type>pass</type>
-			<interface>wan</interface>
-			<ipprotocol>inet</ipprotocol>
-			<tag></tag>
-			<tagged></tagged>
-			<max></max>
-			<max-src-nodes></max-src-nodes>
-			<max-src-conn></max-src-conn>
-			<max-src-states></max-src-states>
-			<statetimeout></statetimeout>
-			<statetype><![CDATA[keep state]]></statetype>
-			<os></os>
-			<source>
-				<address>192.168.1.0/24</address>
-			</source>
-			<destination>
-				<address>192.168.2.0/24</address>
-			</destination>
-			<log></log>
-			<descr></descr>
-			<created>
-				<time>1737126683</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</created>
-			<updated>
-				<time>1737129397</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</updated>
-		</rule>
-		<rule>
-			<id></id>
-			<tracker>1737129178</tracker>
-			<type>pass</type>
-			<interface>wan</interface>
-			<ipprotocol>inet</ipprotocol>
-			<tag></tag>
-			<tagged></tagged>
-			<max></max>
-			<max-src-nodes></max-src-nodes>
-			<max-src-conn></max-src-conn>
-			<max-src-states></max-src-states>
-			<statetimeout></statetimeout>
-			<statetype><![CDATA[keep state]]></statetype>
-			<os></os>
-			<source>
-				<network>lan</network>
-			</source>
-			<destination>
-				<address>192.168.2.0/24</address>
-			</destination>
-			<log></log>
-			<descr></descr>
-			<created>
-				<time>1737129178</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</created>
-			<updated>
-				<time>1737129406</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</updated>
-		</rule>
-		<rule>
-			<id></id>
 			<tracker>1737027848</tracker>
 			<type>pass</type>
 			<interface>wan</interface>
@@ -322,6 +393,7 @@
 				<time>1737129419</time>
 				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
 			</updated>
+			<disabled></disabled>
 		</rule>
 		<rule>
 			<id></id>
@@ -392,9 +464,9 @@
 		</rule>
 		<rule>
 			<id></id>
-			<tracker>1737126594</tracker>
+			<tracker>1740505570</tracker>
 			<type>pass</type>
-			<interface>lan</interface>
+			<interface>wan</interface>
 			<ipprotocol>inet</ipprotocol>
 			<tag></tag>
 			<tagged></tagged>
@@ -405,110 +477,60 @@
 			<statetimeout></statetimeout>
 			<statetype><![CDATA[keep state]]></statetype>
 			<os></os>
+			<protocol>tcp/udp</protocol>
 			<source>
-				<address>192.168.2.0/24</address>
+				<address>192.168.1.135</address>
 			</source>
 			<destination>
-				<address>192.168.1.0/24</address>
+				<any></any>
+				<port>9001-9005</port>
 			</destination>
 			<log></log>
-			<descr></descr>
-			<created>
-				<time>1737126594</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</created>
+			<descr><![CDATA[Tor]]></descr>
 			<updated>
-				<time>1737129445</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
+				<time>1740505570</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
 			</updated>
+			<created>
+				<time>1740505570</time>
+				<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+			</created>
 		</rule>
 		<rule>
-			<id></id>
-			<tracker>1737129153</tracker>
-			<type>pass</type>
-			<interface>lan</interface>
-			<ipprotocol>inet</ipprotocol>
-			<tag></tag>
-			<tagged></tagged>
-			<max></max>
-			<max-src-nodes></max-src-nodes>
-			<max-src-conn></max-src-conn>
-			<max-src-states></max-src-states>
-			<statetimeout></statetimeout>
-			<statetype><![CDATA[keep state]]></statetype>
-			<os></os>
+			<descr><![CDATA[OpenVPN CUTMVPN wizard]]></descr>
 			<source>
-				<network>lan</network>
+				<any></any>
 			</source>
 			<destination>
-				<address>192.168.1.0/24</address>
+				<network>wanip</network>
+				<port>1194</port>
 			</destination>
-			<log></log>
-			<descr></descr>
+			<interface>wan</interface>
+			<protocol>udp</protocol>
+			<type>pass</type>
+			<enabled>on</enabled>
+			<tracker>1740652776</tracker>
 			<created>
-				<time>1737129153</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
+				<time>1740652776</time>
+				<username><![CDATA[OpenVPN Wizard]]></username>
 			</created>
-			<updated>
-				<time>1737129455</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</updated>
 		</rule>
 		<rule>
-			<id></id>
-			<tracker>0100000101</tracker>
-			<type>pass</type>
-			<interface>lan</interface>
-			<ipprotocol>inet</ipprotocol>
-			<tag></tag>
-			<tagged></tagged>
-			<max></max>
-			<max-src-nodes></max-src-nodes>
-			<max-src-conn></max-src-conn>
-			<max-src-states></max-src-states>
-			<statetimeout></statetimeout>
-			<statetype><![CDATA[keep state]]></statetype>
-			<os></os>
+			<descr><![CDATA[OpenVPN CUTMVPN wizard]]></descr>
 			<source>
-				<network>lan</network>
+				<any></any>
 			</source>
 			<destination>
 				<any></any>
 			</destination>
-			<log></log>
-			<descr><![CDATA[Default allow LAN to any rule]]></descr>
-			<updated>
-				<time>1737129460</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</updated>
-		</rule>
-		<rule>
-			<id></id>
-			<tracker>0100000102</tracker>
+			<interface>openvpn</interface>
 			<type>pass</type>
-			<interface>lan</interface>
-			<ipprotocol>inet6</ipprotocol>
-			<tag></tag>
-			<tagged></tagged>
-			<max></max>
-			<max-src-nodes></max-src-nodes>
-			<max-src-conn></max-src-conn>
-			<max-src-states></max-src-states>
-			<statetimeout></statetimeout>
-			<statetype><![CDATA[keep state]]></statetype>
-			<os></os>
-			<source>
-				<network>lan</network>
-			</source>
-			<destination>
-				<any></any>
-			</destination>
-			<log></log>
-			<descr><![CDATA[Default allow LAN IPv6 to any rule]]></descr>
-			<updated>
-				<time>1737129466</time>
-				<username><![CDATA[custm@192.168.1.137 (Local Database)]]></username>
-			</updated>
+			<enabled>on</enabled>
+			<tracker>1740652777</tracker>
+			<created>
+				<time>1740652776</time>
+				<username><![CDATA[OpenVPN Wizard]]></username>
+			</created>
 		</rule>
 		<separator>
 			<wan></wan>
@@ -518,7 +540,17 @@
 	<ipsec>
 		<client></client>
 	</ipsec>
-	<aliases></aliases>
+	<aliases>
+		<alias>
+			<name>pfB_PRI1_v4</name>
+			<url>https://127.0.0.1:443/pfblockerng/pfblockerng.php?pfb=pfB_PRI1_v4</url>
+			<updatefreq>32</updatefreq>
+			<address></address>
+			<descr><![CDATA[pfBlockerNG  Auto  Alias [ Abuse_Feodo_C2_v4,Abuse_SSLBL_v4,CINS_army_v4,ET_Block_v4,ET_Comp_v4,ISC_Block_v4,Spamhaus_Drop_v4,Spamhaus_eDrop_v4,Talos_BL_v4, ]]]></descr>
+			<type>urltable</type>
+			<detail><![CDATA[DO NOT EDIT THIS ALIAS]]></detail>
+		</alias>
+	</aliases>
 	<proxyarp></proxyarp>
 	<cron>
 		<item>
@@ -620,6 +652,24 @@
 			<who>root</who>
 			<command>/root/apply_config.sh</command>
 		</item>
+		<item>
+			<minute>*/5</minute>
+			<hour>*</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/bin/nice -n20 /usr/local/bin/php -f /usr/local/pkg/snort/snort_check_cron_misc.inc</command>
+		</item>
+		<item>
+			<minute>0</minute>
+			<hour>*</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/local/bin/php /usr/local/www/pfblockerng/pfblockerng.php cron &gt;&gt; /var/log/pfblockerng/pfblockerng.log 2&gt;&amp;1</command>
+		</item>
 	</cron>
 	<wol></wol>
 	<rrd>
@@ -627,18 +677,47 @@
 		<category>left=system-processor&amp;right=&amp;resolution=300&amp;timePeriod=-1d&amp;startDate=&amp;endDate=&amp;startTime=0&amp;endTime=0&amp;graphtype=line&amp;invert=true&amp;refresh-interval=0</category>
 	</rrd>
 	<widgets>
-		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show</sequence>
+		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show,snort_alerts:col2:open,pfblockerng:col2:open:0</sequence>
 		<period>10</period>
 	</widgets>
-	<openvpn></openvpn>
-	<dnshaper>
-	</dnshaper>
+	<openvpn>
+		<openvpn-server>
+			<vpnid>1</vpnid>
+			<mode>server_tls_user</mode>
+			<authmode>Local Database</authmode>
+			<protocol>UDP4</protocol>
+			<dev_mode>tun</dev_mode>
+			<interface>wan</interface>
+			<local_port>1194</local_port>
+			<description><![CDATA[CUTMVPN]]></description>
+			<tls>IwojIDIwNDggYml0IE9wZW5WUE4gc3RhdGljIGtleQojCi0tLS0tQkVHSU4gT3BlblZQTiBTdGF0aWMga2V5IFYxLS0tLS0KZmZmMDhjMTI3MjU0M2Q5MmQzNzk1OTcxZmYwOWI5NmEKNjdiYjUxZDE0Zjc0ZWZlNzUxYTNiOTBhOGNkN2NiZTQKNjZlZjg1ZjE0NThlN2RlMjA5Zjk5MTM1Yjk0ZjNlZjkKMmNmNjBlY2Y0N2RlNTZjNGM1NjgwYTdmMzUzMGU2ODUKYTQyNjcwMDNhODNmNGRlZjc5M2JjYzUxM2ViMWU5NWIKMjg2ZGU1ZDk1OWI3ZTZkZWQ2ZjU0OTFlMTY0NGM4NWQKM2E0ZWI4MWU4NzYxNjY5MzE1MzQ0OGU0MWEyMDhiNzgKMjI3Y2QyYzJhYjQ0YmMyMWIxNzBkMzcxNDkzYjNhM2YKODAyNTM1ZGY4MGZjNzc5YmY5ZmUxZjEzOWE4MDUzZjQKMmM2ZTM3MmZmYTFiMDRiNmZiZTQwNGMzZDZhNTIyYTEKMDA3MmY5ZGNiOGY0M2ZmMjM2OTRkNTI0YzhhMTY2MmQKMzQ3ODljZTU3N2E2MzRhZTdhMDhkNDdlMDExZTk2NzMKZTIxMjljM2I0MjM0MjliMmJjNzcxMTA5MDcwOTE1YWUKNDU3ZWY3MGE4MDk5Y2JlMzhiOTk3MjdmODIxZGViZWMKNjI2Yjc5ODFiZTAwMjgwNGMzMDhjZWIwNTJmZjg0M2YKODVjNTdhYTg2YjJkMmM1NTYwNGIxN2Q5MDEyYWVmZDkKLS0tLS1FTkQgT3BlblZQTiBTdGF0aWMga2V5IFYxLS0tLS0K</tls>
+			<tls_type>auth</tls_type>
+			<caref>67c040e7bc7b1</caref>
+			<certref>67c040e85463f</certref>
+			<dh_length>2048</dh_length>
+			<data_ciphers>AES-256-GCM,AES-128-GCM,CHACHA20-POLY1305</data_ciphers>
+			<data_ciphers_fallback>AES-256-CBC</data_ciphers_fallback>
+			<digest>SHA256</digest>
+			<engine>none</engine>
+			<tunnel_network>10.0.8.0/24</tunnel_network>
+			<gwredir>on</gwredir>
+			<local_network>192.168.1.137/32</local_network>
+			<maxclients>1</maxclients>
+			<allow_compression>no</allow_compression>
+			<passtos>on</passtos>
+			<dynamic_ip>yes</dynamic_ip>
+			<topology>subnet</topology>
+			<exit_notify>1</exit_notify>
+			<inactive_seconds>300</inactive_seconds>
+		</openvpn-server>
+	</openvpn>
+	<dnshaper></dnshaper>
 	<unbound>
 		<enable></enable>
 		<dnssec></dnssec>
 		<active_interface></active_interface>
 		<outgoing_interface></outgoing_interface>
-		<custom_options></custom_options>
+		<custom_options>c2VydmVyOmluY2x1ZGU6IC92YXIvdW5ib3VuZC9wZmJfZG5zYmwuKmNvbmY=</custom_options>
 		<hideidentity></hideidentity>
 		<hideversion></hideversion>
 		<dnssecstripped></dnssecstripped>
@@ -646,15 +725,13 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1739799512</time>
-		<description><![CDATA[custm@192.168.1.135 (Local Database): Firewall: Rules - saved/edited a firewall rule.]]></description>
-		<username><![CDATA[custm@192.168.1.135 (Local Database)]]></username>
+		<time>1740794460</time>
+		<description><![CDATA[(system): Updated configuration from GitHub for device 69401b7f8410bb6dbfcaf3cc40314856]]></description>
+		<username><![CDATA[(system)]]></username>
 	</revision>
-	<gateways>
-	</gateways>
+	<gateways></gateways>
 	<captiveportal></captiveportal>
-	<shaper>
-	</shaper>
+	<shaper></shaper>
 	<dnsmasq></dnsmasq>
 	<ntpd>
 		<gps></gps>
@@ -665,6 +742,14 @@
 		<type>server</type>
 		<crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUViekNDQTFlZ0F3SUJBZ0lJZDNxaGVkTW04eUF3RFFZSktvWklodmNOQVFFTEJRQXdWakUwTURJR0ExVUUKQ2hNcmNHWlRaVzV6WlNCSFZVa2daR1ZtWVhWc2RDQlRaV3htTFZOcFoyNWxaQ0JEWlhKMGFXWnBZMkYwWlRFZQpNQndHQTFVRUF4TVZjR1pUWlc1elpTMDJOemc0WlRZeE9URmxaRFF6TUI0WERUSTFNREV4TmpFd05UY3lPVm9YCkRUSTJNREl4T0RFd05UY3lPVm93VmpFME1ESUdBMVVFQ2hNcmNHWlRaVzV6WlNCSFZVa2daR1ZtWVhWc2RDQlQKWld4bUxWTnBaMjVsWkNCRFpYSjBhV1pwWTJGMFpURWVNQndHQTFVRUF4TVZjR1pUWlc1elpTMDJOemc0WlRZeApPVEZsWkRRek1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBcFg4WG1RNlRvWjFZClE0Zmc0ZmZUT0lSQXM4WjJkcS9rVkhLc2xMOHR3V3lvUDJoSU85RzVIZitmbGo5SjRpVG5lNklPMlV5dmYzenAKZ25xTjZIdWFhLzl6bTlyYWlFV045Z0tmY1JYQ2IxdEpidDdnT3ZNcEZxemJ0TFkwazJ5bkhzUDY3QVp0bUZyTQpzLzdrdEVuNEFxNGx4SzF2TVpqVmFZbWJlK2E5aC94SFhPSlZVTk5GNC9HcUEvSjM4NFgxTEx6QXNQMmQ0ZHlMCjFkNjY4SVNxUWJlL1QwTXZDRlBGcFgzekdFM1FsU0dpSlg1SndWMFhQK3IzSjNOekJONEh5SUVDNnpyRlNkZEkKRzRCOXJRaThBWjVLZnNmNS83TTJTZVRXVVhwVnBGR0IzV2t6Y3hlc1gzV25ybUdNYXN6RStORTUyWW5YazFQRwp1ZzRUY3BEdml3SURBUUFCbzRJQlB6Q0NBVHN3Q1FZRFZSMFRCQUl3QURBUkJnbGdoa2dCaHZoQ0FRRUVCQU1DCkJrQXdDd1lEVlIwUEJBUURBZ1dnTURNR0NXQ0dTQUdHK0VJQkRRUW1GaVJQY0dWdVUxTk1JRWRsYm1WeVlYUmwKWkNCVFpYSjJaWElnUTJWeWRHbG1hV05oZEdVd0hRWURWUjBPQkJZRUZGZXh1NVZJc2M3eDlNcHRHN0xMTG5QbApXd0NNTUc4R0ExVWRJd1JvTUdhaFdxUllNRll4TkRBeUJnTlZCQW9USzNCbVUyVnVjMlVnUjFWSklHUmxabUYxCmJIUWdVMlZzWmkxVGFXZHVaV1FnUTJWeWRHbG1hV05oZEdVeEhqQWNCZ05WQkFNVEZYQm1VMlZ1YzJVdE5qYzQKT0dVMk1Ua3haV1EwTTRJSWQzcWhlZE1tOHlBd0p3WURWUjBsQkNBd0hnWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRgpCd01DQmdnckJnRUZCUWdDQWpBZ0JnTlZIUkVFR1RBWGdoVndabE5sYm5ObExUWTNPRGhsTmpFNU1XVmtORE13CkRRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFHQ25mVWFyanRseVMySzZ3ZWdpa0V4SFRLTEUyRGU1eEV5RDVLelQKWVhYMitYbFhLUTc5cWdMM3NieXkrTStES2FKUmZ0TDRKZHNBZ1RnUWVFQnZrR0pNSWozRzQ1Mm5kdjlFRzFCMwpHekVLcFh4b1JGYUNMQ1cxKzlYQ1ppRnNlbWRXMzhpa2t0YTdGQmNQcG0zaGxTR3FxYjNRMUpnRUY2ckZ4QmxBClhYNm5YMFNHUU1GSW5yMFVoalRwY0ZrUlYvNG5GYkJPS2ROdEVLV1B3QkZRdUJHVGQ3QU9md0ZCRi9ZN1dvRUcKTHNrd3A5ZDJUaXZXOXhQOUt1MlUyOHJsbHBwcU4wMXlwZDZmU0VtMXE2dEhYa1RTUVorSmI4R2ZPOVZtRlRWbQpReGgrZFU0NUl0NzJwYjhzZWY3dmpuNWVvK3JLMENOMndrR21NWmNvc2M5VUlobz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</crt>
 		<prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ2xmeGVaRHBPaG5WaEQKaCtEaDk5TTRoRUN6eG5aMnIrUlVjcXlVdnkzQmJLZy9hRWc3MGJrZC81K1dQMG5pSk9kN29nN1pUSzkvZk9tQwplbzNvZTVwci8zT2IydHFJUlkzMkFwOXhGY0p2VzBsdTN1QTY4eWtXck51MHRqU1RiS2Nldy9yc0JtMllXc3l6Ci91UzBTZmdDcmlYRXJXOHhtTlZwaVp0NzVyMkgvRWRjNGxWUTAwWGo4YW9EOG5memhmVXN2TUN3L1ozaDNJdlYKM3Jyd2hLcEJ0NzlQUXk4SVU4V2xmZk1ZVGRDVklhSWxma25CWFJjLzZ2Y25jM01FM2dmSWdRTHJPc1ZKMTBnYgpnSDJ0Q0x3Qm5rcCt4L24vc3paSjVOWlJlbFdrVVlIZGFUTnpGNnhmZGFldVlZeHF6TVQ0MFRuWmlkZVRVOGE2CkRoTnlrTytMQWdNQkFBRUNnZ0VBQzZPSmhGRWJIdFdTL0lUVTB1OTc0bENpd0VIbjJPYjcxdGlOdkpSSlluNEMKd3hyUllhdVpLanZzL0VNTkxpTk1TRXlZWUwzYzVjbGlIclFCd09UWWNsbnZ4bms0dnphdENpMGJDM2Z0U2FtUQoyNFEvSHNZMUVJd3RrMkx4QmFFeGk1OWF5VGlXZ28xNE1meHVGeVBRbGxlcS9rNzRML1BBcG9CdjkrRzlXSS9QCmZXazBEbmJndU5UVXYxQlM4bkgrd1hjaVk5YndsOE1QY3QxQmJTdFd5SEpMUVBUWmNwUW1LQmlrSUdDdlRicjUKTG91c3pBbVRBUEFURC9hSmdSd3lCSCtOVWNwcjhlZHl0bnFWcFZzTWs3M2YwaStHQms4ZWI3Q2dmbUZwMFpiNgpZcU1EbHVJWHI2ZEFrRVpKREVpN1VaL0lES1U3NXNXOWVPMW5sNjJrWVFLQmdRRE9DWnpmRWRDMjZPN3ZWbTIxCmVNUjl0S0hvMDF5blBTZDFmd2dDOUVBSERQcG9ZRkhwS3BMS2pkK0xaems1dXgvbFZpMlhDYzZJMTc1bEVUOTUKZVlNRFBlSjJ0Zk1RY05xV1d6cEtQRXhMaXYyQ1VkdzFoblNiekNERXRRZ2l1WWpkc3BLWmp2WXhyT2lNTkt2MgpWNVFTc2Z6bDlKUzA2UVpkYTdCcHU1VmI4UUtCZ1FETm9NV0U3Wlk5QTdORkZZd3dJcHlFNHBaOXVGYzdzMVdtCjNocUZhdEFONnNCYkI1a2FXaFVrMk92Z09GYmUwQnJLNDVpNEVLNzl6SHM0WWNPeUJoK1VQK0cxdkZJYmxjSHoKV2h6N0VTbWtQZFpuM0JZR1B4VWdhdEp4d2FwWG9aYTFoSzk4WnpzcUQvcVNUeXZnUCtRRHZUNFp4YXU3YU5ZbApWdDd3ZVB1dk93S0JnUUMwWXhJbTh4QUt0QkZORmh4alAySzR0QWIxTXVmeHU4YnFSZGViem9Db0s2S284M3VECmFyU3VCbHhyVG1wNXN1MFArczFiYVVpYjRsZGRZU1p6a2dFME8yQWtrdFJGMXFocDcyRXZVVzl5ekRON2YzUU8Kb0xOREhBcXNiZHE3bkRqSjhPZ003Vzk2dW1tM0p2NVBaUW5NL0d2d1lKdzViN01VNDQzR1pHYzE0UUtCZ0J0LwpjR3FDU3lFRnFhZUhaaVBadlF5WU1IL0hjd0xzekh0d0lDUFBVTnRMbFVXWEVvWlBuWnc3MWU4NkdZUGFXSHJoClRMN3duRFljYmkzd0JQZDlraU9GRjIzeUxSaTdRaUNFNEhOQ3JFcm1haEdoZ09CODl4cEtyckcvc0VQZnZBT3kKSnJXQUtJMUxiYnE3RTZiOVpFU0x2ZzQ4UE9ibThodzBMY1FDcWNXWkFvR0FMdmZvT04zYTlnNHB6YkhtRzRjcwoxV1NOR2xWUG9vVTZlVlJqWE1OeHlBZFhTUzFMbzRzemtpeFNwbU5BU2VKeWI5N1FEWkkwcXMrUkI4a0VSZ1ZGCm1mWDZsZXRiQWZwd0NJdy9mL3V1QTlLVDg3dm10WE5jSHovNXQwYUQ2U3Q4WFRWbmdaZ1B0TFo2c0t0N3hSTWQKM1FKZVdJWnlwUXl5VmNMcVRoYXVieDg9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K</prv>
+	</cert>
+	<cert>
+		<refid>67c040e85463f</refid>
+		<descr><![CDATA[customio]]></descr>
+		<type>server</type>
+		<caref>67c040e7bc7b1</caref>
+		<crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVtVENDQTRHZ0F3SUJBZ0lJYURWSzRpMWdJUW93RFFZSktvWklodmNOQVFFTEJRQXdYekVPTUF3R0ExVUUKQXhNRlExVlRWRTB4Q3pBSkJnTlZCQVlUQWtWVE1SSXdFQVlEVlFRSUV3bEJUa1JCVEZWRFNVRXhEekFOQmdOVgpCQWNUQmsxQlRFRkhRVEVPTUF3R0ExVUVDaE1GUTFWVFZFMHhDekFKQmdOVkJBc1RBbEpFTUI0WERUSTFNREl5Ck56RXdNemt6TmxvWERUSTJNRFF3TVRFd016a3pObG93WWpFUk1BOEdBMVVFQXhNSVkzVnpkRzl0YVc4eEN6QUoKQmdOVkJBWVRBa1ZUTVJJd0VBWURWUVFJRXdsQlRrUkJURlZEU1VFeER6QU5CZ05WQkFjVEJrMUJURUZIUVRFTwpNQXdHQTFVRUNoTUZRMVZUVkUweEN6QUpCZ05WQkFzVEFsSkVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUF2TVZqNG1nMU5QMDFDOXlBK0xLZXlWQUlVSTNSU3hGdmxybXU5OVFnWHk0dnNqanEKWGkwdmE5WktaVlRrQmhGV1c1TkhaaERnNmQxSEQrSXJKRXBTVU5JK3hjMXd5UjFsNVZQdnE4RXB3VEw5Rk0vaQprbmhKWlF3QnowQVlQcU03L2w1UXpPK2FmbnQ2enVyYk95OVJOVVk0WHN0RlkzQTJBdmEvVFpCcU5vWU5GY1RUCnlVeXNFd2RkSXV2WDVLeFg2S29LS2cySGt0N3VyRXk0eVdVeFo4UHlFRDdsRzUvdUNiMi9iME55dWNWcVZiK24KWGxzYjRrbjh2NzM1N09qTmMvTktROTZoUFNuZHJkZlRXdnM4eU95ZzE0K1BUY0ExZDZPSld2ZEVsWURkaVo3RAowcHU1V2MvdGZhRm1EV0VQWXB2cmZQTENNaGxSWmJDQ24zT2xlUUlEQVFBQm80SUJWRENDQVZBd0NRWURWUjBUCkJBSXdBREFSQmdsZ2hrZ0JodmhDQVFFRUJBTUNCa0F3Q3dZRFZSMFBCQVFEQWdXZ01ETUdDV0NHU0FHRytFSUIKRFFRbUZpUlBjR1Z1VTFOTUlFZGxibVZ5WVhSbFpDQlRaWEoyWlhJZ1EyVnlkR2xtYVdOaGRHVXdIUVlEVlIwTwpCQllFRklIOWRMa28raGVNRWpFMVhyNW1JUWpOR3NzM01JR1FCZ05WSFNNRWdZZ3dnWVdBRkI4QnR0TjU2dFZXCm5qM1Z3SlBLUzFSNWYrdldvV09rWVRCZk1RNHdEQVlEVlFRREV3VkRWVk5VVFRFTE1Ba0dBMVVFQmhNQ1JWTXgKRWpBUUJnTlZCQWdUQ1VGT1JFRk1WVU5KUVRFUE1BMEdBMVVFQnhNR1RVRk1RVWRCTVE0d0RBWURWUVFLRXdWRApWVk5VVFRFTE1Ba0dBMVVFQ3hNQ1VrU0NDRUVQeFVqdWFIYjVNQ2NHQTFVZEpRUWdNQjRHQ0NzR0FRVUZCd01CCkJnZ3JCZ0VGQlFjREFnWUlLd1lCQlFVSUFnSXdFd1lEVlIwUkJBd3dDb0lJWTNWemRHOXRhVzh3RFFZSktvWkkKaHZjTkFRRUxCUUFEZ2dFQkFFdHJIT0g3M0VZMDNmNUZ5ZFpPbkpBTzMvaXR0SGtaNXBnb25tK2hnL3JZbHlQYwpudko0VHhBUUZSbEJVTEp2UkNOaGh6aDB4L1JybXdSbWl2MXF1UkhRcmpjLzNJMHJCR3pNbHhBRi9kekJ0ZSt0CjQwbEs3UllVOU5abi93VDI0cktzU0tHa0FRdXMyNWFVbXFWQmZqc0JyaHo3bFVBQ0JTYlBYTWNBRnJMV2lNckwKck14SnFNa2tyVTF4N1dkWnBpMW4rNnpsTWRxQkJDVTM1UDYzS0ZaOVU5ZUFxV3FITVVFTEdWbXdsQytLbmNhSwpKUGgycjJaeXg5UE9SRzZSSmNDRW9RRjNTNk85MHlqbFlmcmxyVDRDS1RPdkRWL3hXd1I2UmdWblBSdWlhNG5ICjdGWXJlcUtFcGZGenl3eDBidDh2OUZjN2Q3ZXd4V3p6L0RuVXk0bz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</crt>
+		<prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzh4V1BpYURVMC9UVUwKM0lENHNwN0pVQWhRamRGTEVXK1d1YTczMUNCZkxpK3lPT3BlTFM5cjFrcGxWT1FHRVZaYmswZG1FT0RwM1VjUAo0aXNrU2xKUTBqN0Z6WERKSFdYbFUrK3J3U25CTXYwVXorS1NlRWxsREFIUFFCZytvenYrWGxETTc1cCtlM3JPCjZ0czdMMUUxUmpoZXkwVmpjRFlDOXI5TmtHbzJoZzBWeE5QSlRLd1RCMTBpNjlma3JGZm9xZ29xRFllUzN1NnMKVExqSlpURm53L0lRUHVVYm4rNEp2Yjl2UTNLNXhXcFZ2NmRlV3h2aVNmeS92Zm5zNk0xejgwcEQzcUU5S2QydAoxOU5hK3p6STdLRFhqNDlOd0RWM280bGE5MFNWZ04ySm5zUFNtN2xaeisxOW9XWU5ZUTlpbSt0ODhzSXlHVkZsCnNJS2ZjNlY1QWdNQkFBRUNnZ0VBQlRiRjI2dzVncXFzYXorZWJRQWJXYXAxRXdDRkhqZmFQTEFKUmYxeWNzazgKUzdCb2JNeCtYdnlrRm1qQ0JFR09BSlBiVTRBMkxpVE1xeTE1NHBQam5TbUplVk9EZ05LU2pNTXZsSzlqcWdYdwpycGFsVysvOW12c1BhN3cwcEkrWlZISjNkSW1qc0oycGdUWHZIZWlMSzRKZExvL0ZHQW95a1F5NVc2T1lXTVFqCjVFaEM4ZWNpNUI1Lyt2dlVUL2FEZ081Ri9lcUM4TkVVODArZ1RrNEJpbE1QMmF4U3FBY3pTcDFmUEF1S1V0MWoKNzdMeDUzUHB4aWFkdEdwTXJQdUJYKzQzY0wwNFlsaS9kYXZ3dkVMeTdLVVp0dG5pWFBobkk2T3lrR3ZWWTd0dgpsVjMzVmtQaFJRY3dud1gzUmFjVXlCem4yKzNkTmxHZ3locVZqdUFKSndLQmdRRDBnYm9GOWhFZjlCRHRiRjFXCnZCY1J6cStCTndJN2N6ZDAxYVZUTlhzU3FoSktGSElsZlNoV1lHc1UwSmxjTy9UdGJvTm9CYmFlUXpyM292MmsKSm5IVEpGMk54WFNKd25TbjBFTklXS242RERzNHpob3FDM0Y3elpEczUzY09vaEhmdEIwUDBkQU1QUjZTYVI1RAo4c1lTWkRzTmduaGkyZGM4SkhJbTFXbCtKd0tCZ1FERnBQZkFHMzBPTjh4QktkNERhbEtNM2tJL1llVmtmeENRCkdyRDVOY2JWVWEzY05ORHJ5YXN3dXphamlXbDUxTTZETlNFYVp1MjNTaG93ZEVTcnhKbkR1d0cxTVhVVTdKc1QKRUMxRkYvLzJpekQzZUlKYVJhbi9vNjlCaGM1WnNydkRiakNYYlNwKzV6ZUZubEVyUVpDVVVCZzUvMnQ2dTBEcApxZVFubGcyalh3S0JnUUN4MUZ3b2s4UDJ1bnRKUXVSTC9mYkZZODZ2cXdON201dTg1Tm9lUDZwb2M3dGpsNlZCCmNOclNuOE9oMnVsL2RMZjVxOFAwOXhyUDFsUGY0ZktaM2NBeGNhUjlSUnd5U1hTd3pMN3lzbEhGNC9sNm9pUFQKYW9rNkl0T0NDZ0xFYU1tWkt4VnIrUXhZcW1jKzB5ZEpBaHhmS2ZqdEpYUkxhT2FxL2xMcnZaSEJSd0tCZ1FDRgp6YmtzaFcrVVFKSTNTM0RTUHhqRDVYUlVGS0tIOXIzdjBTSWVsUm1YTVVUUzM2N1E4aWJEUnZzbW05Q2Nla1dVCjdsTUszTVB5WW1oNGhUNDRTMUVPQVh5V2ZuVVZSVmwyL215bmFpZ1BjUXdsZmFCQ0hRZUoyZmE4RlNvdDc2TE8KRzdzcHlPNE1HOXlxeVJPS2hVaXNIODFHOW5SOUVtaFB5SVI5aUVpVFlRS0JnQ2JjZ1dIY01WdUQxZDF4bnh3ZwpNaFQ2L3gxZ3U2clRLVXR1OU9rYldTUnp2anFVd0NhejU1b0M3VWY2WDNSTEpwWTAzY2JPZmVjL1UrMkM3MjVtCkVWeGtjSUlNR1NhOE8wTWduTmNsUUV6bEJ2UnZPVnYwLzlvK1BzdURqVnJaMnJiRXR4M2phN0QxQzlXRW5iVDEKSUtTZXZVazdJaHJnS0FVcWNSYW1RQnNRCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K</prv>
 	</cert>
 	<ppps></ppps>
 	<installedpackages>
@@ -727,6 +812,29 @@
 			</tabs>
 			<include_file>/usr/local/pkg/ntopng.inc</include_file>
 		</package>
+		<package>
+			<name>snort</name>
+			<pkginfolink>https://docs.netgate.com/pfsense/en/latest/packages/snort/index.html</pkginfolink>
+			<website>http://www.snort.org</website>
+			<descr><![CDATA[Snort is an open source network intrusion prevention and detection system (IDS/IPS). Combining the benefits of signature, protocol, and anomaly-based inspection.]]></descr>
+			<version>4.1.6_17</version>
+			<configurationfile>/snort.xml</configurationfile>
+			<after_install_info>Please visit Services - Snort - Interfaces tab first and select your desired rules. Afterwards visit the Updates tab to download your configured rulesets.</after_install_info>
+			<include_file>/usr/local/pkg/snort/snort.inc</include_file>
+		</package>
+		<package>
+			<name>pfBlockerNG</name>
+			<descr><![CDATA[Manage IPv4/v6 List Sources into &#039;Deny, Permit or Match&#039; formats.&lt;br /&gt;
+			GeoIP database by MaxMind Inc. (GeoLite2 Free version).&lt;br /&gt;
+			De-Duplication, Suppression, and Reputation enhancements.&lt;br /&gt;
+			Provision to download from diverse List formats.&lt;br /&gt;
+			Advanced Integration for Proofpoint ET IQRisk IP Reputation Threat Sources.&lt;br /&gt;
+			Domain Name (DNSBL) blocking via Unbound DNS Resolver.]]></descr>
+			<pkginfolink>https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html</pkginfolink>
+			<version>3.2.0_8</version>
+			<configurationfile>pfblockerng.xml</configurationfile>
+			<include_file>/usr/local/pkg/pfblockerng/pfblockerng.inc</include_file>
+		</package>
 		<sudo>
 			<config>
 				<row>
@@ -770,6 +878,12 @@
 			<url>/nmap_scan.php</url>
 		</menu>
 		<menu>
+			<name>Snort</name>
+			<tooltiptext>Set up snort specific settings</tooltiptext>
+			<section>Services</section>
+			<url>/snort/snort_interfaces.php</url>
+		</menu>
+		<menu>
 			<name>ntopng Settings</name>
 			<tooltiptext>Set ntopng settings such as password and port.</tooltiptext>
 			<section>Diagnostics</section>
@@ -780,6 +894,11 @@
 			<tooltiptext>Access ntopng</tooltiptext>
 			<section>Diagnostics</section>
 			<url>/ntopng_redirect.php</url>
+		</menu>
+		<menu>
+			<name>pfBlockerNG</name>
+			<section>Firewall</section>
+			<url>/pfblockerng/pfblockerng_general.php</url>
 		</menu>
 		<acme>
 			<accountkeys></accountkeys>
@@ -801,11 +920,545 @@
 			</config>
 		</ntopng>
 		<service>
+			<name>snort</name>
+			<rcfile>snort.sh</rcfile>
+			<executable>snort</executable>
+			<description><![CDATA[Snort IDS/IPS Daemon]]></description>
+		</service>
+		<service>
 			<name>ntopng</name>
 			<rcfile>ntopng.sh</rcfile>
 			<executable>ntopng</executable>
 			<description><![CDATA[ntopng Network Traffic Monitor]]></description>
 		</service>
+		<service>
+			<name>pfb_dnsbl</name>
+			<rcfile>pfb_dnsbl.sh</rcfile>
+			<executable>lighttpd_pfb</executable>
+			<description><![CDATA[pfBlockerNG DNSBL service]]></description>
+		</service>
+		<service>
+			<name>pfb_filter</name>
+			<rcfile>pfb_filter.sh</rcfile>
+			<executable>php_pfb</executable>
+			<description><![CDATA[pfBlockerNG firewall filter service]]></description>
+		</service>
+		<snortglobal>
+			<forcekeepsettings>on</forcekeepsettings>
+			<snort_config_ver>4.1.6_17</snort_config_ver>
+			<snortdownload>off</snortdownload>
+			<snortcommunityrules>on</snortcommunityrules>
+			<emergingthreats>off</emergingthreats>
+			<emergingthreats_pro>off</emergingthreats_pro>
+			<enable_feodo_botnet_c2_rules>off</enable_feodo_botnet_c2_rules>
+			<clearblocks>off</clearblocks>
+			<verbose_logging>off</verbose_logging>
+			<openappid_detectors>off</openappid_detectors>
+			<openappid_rules_detectors>off</openappid_rules_detectors>
+			<hide_deprecated_rules>off</hide_deprecated_rules>
+			<curl_no_verify_ssl_peer>off</curl_no_verify_ssl_peer>
+			<oinkmastercode></oinkmastercode>
+			<etpro_code></etpro_code>
+			<rm_blocked>never_b</rm_blocked>
+			<autorulesupdate7>never_up</autorulesupdate7>
+			<rule>
+				<interface>wan</interface>
+				<enable>off</enable>
+				<uuid>16180</uuid>
+				<descr><![CDATA[WAN]]></descr>
+				<performance>ac-bnfa</performance>
+				<snaplen>1518</snaplen>
+				<ips_mode>ips_mode_legacy</ips_mode>
+				<enable_pkt_caps>off</enable_pkt_caps>
+				<tcpdump_file_size>128</tcpdump_file_size>
+				<unified2_logging_enable>off</unified2_logging_enable>
+				<unified2_log_vlan_events>off</unified2_log_vlan_events>
+				<unified2_log_mpls_events>off</unified2_log_mpls_events>
+				<blockoffenders7>off</blockoffenders7>
+				<blockoffenderskill>on</blockoffenderskill>
+				<blockoffendersip>both</blockoffendersip>
+				<whitelistname>default</whitelistname>
+				<homelistname>default</homelistname>
+				<externallistname>default</externallistname>
+				<suppresslistname>default</suppresslistname>
+				<alertsystemlog>off</alertsystemlog>
+				<alertsystemlog_facility>log_auth</alertsystemlog_facility>
+				<alertsystemlog_priority>log_alert</alertsystemlog_priority>
+				<cksumcheck>off</cksumcheck>
+				<fpm_split_any_any>off</fpm_split_any_any>
+				<fpm_search_optimize>off</fpm_search_optimize>
+				<fpm_no_stream_inserts>off</fpm_no_stream_inserts>
+				<max_attribute_hosts>10000</max_attribute_hosts>
+				<max_attribute_services_per_host>10</max_attribute_services_per_host>
+				<max_paf>16000</max_paf>
+				<ftp_preprocessor>on</ftp_preprocessor>
+				<ftp_telnet_inspection_type>stateful</ftp_telnet_inspection_type>
+				<ftp_telnet_alert_encrypted>off</ftp_telnet_alert_encrypted>
+				<ftp_telnet_check_encrypted>on</ftp_telnet_check_encrypted>
+				<ftp_telnet_normalize>on</ftp_telnet_normalize>
+				<ftp_telnet_detect_anomalies>on</ftp_telnet_detect_anomalies>
+				<ftp_telnet_ayt_attack_threshold>20</ftp_telnet_ayt_attack_threshold>
+				<ftp_client_engine>
+					<item>
+						<name>default</name>
+						<bind_to>all</bind_to>
+						<max_resp_len>256</max_resp_len>
+						<telnet_cmds>no</telnet_cmds>
+						<ignore_telnet_erase_cmds>yes</ignore_telnet_erase_cmds>
+						<bounce>yes</bounce>
+						<bounce_to_net></bounce_to_net>
+						<bounce_to_port></bounce_to_port>
+					</item>
+				</ftp_client_engine>
+				<ftp_server_engine>
+					<item>
+						<name>default</name>
+						<bind_to>all</bind_to>
+						<ports>default</ports>
+						<telnet_cmds>no</telnet_cmds>
+						<ignore_telnet_erase_cmds>yes</ignore_telnet_erase_cmds>
+						<ignore_data_chan>no</ignore_data_chan>
+						<def_max_param_len>100</def_max_param_len>
+					</item>
+				</ftp_server_engine>
+				<smtp_preprocessor>on</smtp_preprocessor>
+				<smtp_memcap>838860</smtp_memcap>
+				<smtp_max_mime_mem>838860</smtp_max_mime_mem>
+				<smtp_b64_decode_depth>0</smtp_b64_decode_depth>
+				<smtp_qp_decode_depth>0</smtp_qp_decode_depth>
+				<smtp_bitenc_decode_depth>0</smtp_bitenc_decode_depth>
+				<smtp_uu_decode_depth>0</smtp_uu_decode_depth>
+				<smtp_email_hdrs_log_depth>1464</smtp_email_hdrs_log_depth>
+				<smtp_ignore_data>off</smtp_ignore_data>
+				<smtp_ignore_tls_data>on</smtp_ignore_tls_data>
+				<smtp_log_mail_from>on</smtp_log_mail_from>
+				<smtp_log_rcpt_to>on</smtp_log_rcpt_to>
+				<smtp_log_filename>on</smtp_log_filename>
+				<smtp_log_email_hdrs>on</smtp_log_email_hdrs>
+				<dce_rpc_2>on</dce_rpc_2>
+				<dns_preprocessor>on</dns_preprocessor>
+				<ssl_preproc>on</ssl_preproc>
+				<pop_preproc>on</pop_preproc>
+				<pop_memcap>838860</pop_memcap>
+				<pop_b64_decode_depth>0</pop_b64_decode_depth>
+				<pop_qp_decode_depth>0</pop_qp_decode_depth>
+				<pop_bitenc_decode_depth>0</pop_bitenc_decode_depth>
+				<pop_uu_decode_depth>0</pop_uu_decode_depth>
+				<imap_preproc>on</imap_preproc>
+				<imap_memcap>838860</imap_memcap>
+				<imap_b64_decode_depth>0</imap_b64_decode_depth>
+				<imap_qp_decode_depth>0</imap_qp_decode_depth>
+				<imap_bitenc_decode_depth>0</imap_bitenc_decode_depth>
+				<imap_uu_decode_depth>0</imap_uu_decode_depth>
+				<sip_preproc>on</sip_preproc>
+				<other_preprocs>on</other_preprocs>
+				<pscan_protocol>all</pscan_protocol>
+				<pscan_type>all</pscan_type>
+				<pscan_memcap>10000000</pscan_memcap>
+				<pscan_sense_level>medium</pscan_sense_level>
+				<http_inspect>on</http_inspect>
+				<http_inspect_proxy_alert>off</http_inspect_proxy_alert>
+				<http_inspect_memcap>150994944</http_inspect_memcap>
+				<http_inspect_max_gzip_mem>838860</http_inspect_max_gzip_mem>
+				<http_inspect_engine>
+					<item>
+						<name>default</name>
+						<bind_to>all</bind_to>
+						<server_profile>all</server_profile>
+						<enable_xff>off</enable_xff>
+						<log_uri>off</log_uri>
+						<log_hostname>off</log_hostname>
+						<server_flow_depth>65535</server_flow_depth>
+						<enable_cookie>on</enable_cookie>
+						<client_flow_depth>1460</client_flow_depth>
+						<extended_response_inspection>on</extended_response_inspection>
+						<no_alerts>off</no_alerts>
+						<unlimited_decompress>on</unlimited_decompress>
+						<inspect_gzip>on</inspect_gzip>
+						<normalize_cookies>on</normalize_cookies>
+						<normalize_headers>on</normalize_headers>
+						<normalize_utf>on</normalize_utf>
+						<normalize_javascript>on</normalize_javascript>
+						<allow_proxy_use>off</allow_proxy_use>
+						<inspect_uri_only>off</inspect_uri_only>
+						<max_javascript_whitespaces>200</max_javascript_whitespaces>
+						<post_depth>-1</post_depth>
+						<max_headers>0</max_headers>
+						<max_spaces>0</max_spaces>
+						<max_header_length>0</max_header_length>
+						<ports>default</ports>
+						<decompress_swf>off</decompress_swf>
+						<decompress_pdf>off</decompress_pdf>
+					</item>
+				</http_inspect_engine>
+				<frag3_max_frags>8192</frag3_max_frags>
+				<frag3_memcap>4194304</frag3_memcap>
+				<frag3_detection>on</frag3_detection>
+				<frag3_engine>
+					<item>
+						<name>default</name>
+						<bind_to>all</bind_to>
+						<policy>bsd</policy>
+						<timeout>60</timeout>
+						<min_ttl>1</min_ttl>
+						<detect_anomalies>on</detect_anomalies>
+						<overlap_limit>0</overlap_limit>
+						<min_frag_len>0</min_frag_len>
+					</item>
+				</frag3_engine>
+				<stream5_reassembly>on</stream5_reassembly>
+				<stream5_flush_on_alert>off</stream5_flush_on_alert>
+				<stream5_prune_log_max>1048576</stream5_prune_log_max>
+				<stream5_track_tcp>on</stream5_track_tcp>
+				<stream5_max_tcp>262144</stream5_max_tcp>
+				<stream5_track_udp>on</stream5_track_udp>
+				<stream5_max_udp>131072</stream5_max_udp>
+				<stream5_udp_timeout>30</stream5_udp_timeout>
+				<stream5_track_icmp>off</stream5_track_icmp>
+				<stream5_max_icmp>65536</stream5_max_icmp>
+				<stream5_icmp_timeout>30</stream5_icmp_timeout>
+				<stream5_mem_cap>8388608</stream5_mem_cap>
+				<stream5_tcp_engine>
+					<item>
+						<name>default</name>
+						<bind_to>all</bind_to>
+						<policy>bsd</policy>
+						<timeout>30</timeout>
+						<max_queued_bytes>1048576</max_queued_bytes>
+						<detect_anomalies>off</detect_anomalies>
+						<overlap_limit>0</overlap_limit>
+						<max_queued_segs>2621</max_queued_segs>
+						<require_3whs>off</require_3whs>
+						<startup_3whs_timeout>0</startup_3whs_timeout>
+						<no_reassemble_async>off</no_reassemble_async>
+						<max_window>0</max_window>
+						<use_static_footprint_sizes>off</use_static_footprint_sizes>
+						<check_session_hijacking>off</check_session_hijacking>
+						<dont_store_lg_pkts>off</dont_store_lg_pkts>
+						<ports_client>default</ports_client>
+						<ports_both>default</ports_both>
+						<ports_server>none</ports_server>
+					</item>
+				</stream5_tcp_engine>
+				<appid_preproc>off</appid_preproc>
+				<sf_appid_mem_cap>256</sf_appid_mem_cap>
+				<sf_appid_statslog>on</sf_appid_statslog>
+				<sf_appid_stats_period>300</sf_appid_stats_period>
+				<ssh_preproc_ports>22</ssh_preproc_ports>
+				<ssh_preproc_max_encrypted_packets>20</ssh_preproc_max_encrypted_packets>
+				<ssh_preproc_max_client_bytes>19600</ssh_preproc_max_client_bytes>
+				<ssh_preproc_max_server_version_len>100</ssh_preproc_max_server_version_len>
+				<ssh_preproc_enable_respoverflow>on</ssh_preproc_enable_respoverflow>
+				<ssh_preproc_enable_srvoverflow>on</ssh_preproc_enable_srvoverflow>
+				<ssh_preproc_enable_ssh1crc32>on</ssh_preproc_enable_ssh1crc32>
+				<ssh_preproc_enable_protomismatch>on</ssh_preproc_enable_protomismatch>
+				<autoflowbitrules>on</autoflowbitrules>
+				<ips_policy_enable>off</ips_policy_enable>
+				<rulesets>GPLv2_community.rules</rulesets>
+				<arp_spoof_engine></arp_spoof_engine>
+			</rule>
+			<auto_manage_sids>off</auto_manage_sids>
+			<enable_log_mgmt>on</enable_log_mgmt>
+			<alert_log_limit_size>500</alert_log_limit_size>
+			<alert_log_retention>336</alert_log_retention>
+			<appid_alerts_log_retention>336</appid_alerts_log_retention>
+			<appid_alerts_log_limit_size>500</appid_alerts_log_limit_size>
+			<appid_stats_log_limit_size>1000</appid_stats_log_limit_size>
+			<appid_stats_log_retention>168</appid_stats_log_retention>
+			<event_pkts_log_limit_size>0</event_pkts_log_limit_size>
+			<event_pkts_log_retention>336</event_pkts_log_retention>
+			<sid_changes_log_limit_size>250</sid_changes_log_limit_size>
+			<sid_changes_log_retention>336</sid_changes_log_retention>
+			<stats_log_limit_size>500</stats_log_limit_size>
+			<stats_log_retention>168</stats_log_retention>
+			<sid_mgmt_lists>
+				<item>
+					<name>modifysid-sample.conf</name>
+					<modtime>1711481917</modtime>
+					<content>IyBleGFtcGxlIG1vZGlmeXNpZC5jb25mCiMKIyBmb3JtYXR0aW5nIGlzIHNpbXBsZQojIDxzaWQgb3Igc2lkIGxpc3Q+ICJ3aGF0IEknbSByZXBsYWNpbmciICJ3aGF0IEknbSByZXBsYWNpbmcgaXQgd2l0aCIKIwojIE5vdGUgdGhhdCB0aGlzIHdpbGwgb25seSB3b3JrIHdpdGggR0lEOjEgcnVsZXMsIHNpbXBseSBiZWNhdXNlIG1vZGlmeWluZwojIEdJRDozIFNPIHN0dWIgcnVsZXMgd291bGQgbm90IGFjdHVhbGx5IGFmZmVjdCB0aGUgcnVsZS4KIwojIElmIHlvdSBhcmUgYXR0ZW1wdGluZyB0byBjaGFuZ2UgcnVsZXN0YXRlIChlbmFibGUsZGlzYWJsZSkgZnJvbSBoZXJlCiMgdGhlbiB5b3UgYXJlIGRvaW5nIGl0IHdyb25nLiBEbyB0aGlzIGZyb20gd2l0aGluIHRoZSByZXNwZWN0aXZlIAojIHJ1bGVzdGF0ZSBtb2RpZmljYXRpb24gY29uZmlndXJhdGlvbiBmaWxlcy4KCiMgdGhlIGZvbGxvd2luZyBhcHBsaWVzIHRvIHNpZCAxMDAxMCBvbmx5IGFuZCByZXByZXNlbnRzIHdoYXQgd291bGQgbm9ybWFsbHkKIyBiZSBzL3RvX2NsaWVudC9mcm9tX3NlcnZlci8KIyAxMDAxMCAidG9fY2xpZW50IiAiZnJvbV9zZXJ2ZXIiCgojIHRoZSBmb2xsb3dpbmcgd291bGQgcmVwbGFjZSBIVFRQX1BPUlRTIHdpdGggSFRUUFNfUE9SVFMgZm9yIEFMTCBHSUQ6MQojIHJ1bGVzCiMgIkhUVFBfUE9SVFMiICJIVFRQU19QT1JUUyIKCiMgbXVsdGlwbGUgc2lkcyBjYW4gYmUgc3BlY2lmaWVkIGFzIG5vdGVkIGJlbG93OgojIDMwMiw0MjksMTgyMSAiXCRFWFRFUk5BTF9ORVQiICJcJEhPTUVfTkVUIgoK</content>
+				</item>
+				<item>
+					<name>dropsid-sample.conf</name>
+					<modtime>1711481917</modtime>
+					<content>IyBOb3RlOiBUaGlzIGZpbGUgaXMgdXNlZCB0byBzcGVjaWZ5IHdoYXQgcnVsZXMgeW91IHdpc2ggdG8gYmUgc2V0IHRvIGhhdmUKIyBhbiBhY3Rpb24gb2YgZHJvcCByYXRoZXIgdGhhbiBhbGVydC4KCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgYWN0aW9uIGZvciBpbmRpdmlkdWFsIHJ1bGVzCiMgMToxMDM0LDE6OTgzNywxOjEyNzAsMTozMzkwLDE6NzEwLDE6MTI0OSwzOjEzMDEwCgojIEV4YW1wbGUgb2YgbW9kaWZ5aW5nIGFjdGlvbiBmb3IgcnVsZSByYW5nZXMKIyAxOjIyMC0xOjMyNjQsMzoxMzAxMC0zOjEzMDEzCgojIENvbW1lbnRzIGFyZSBhbGxvd2VkIGluIHRoaXMgZmlsZSwgYW5kIGNhbiBhbHNvIGJlIG9uIHRoZSBzYW1lIGxpbmUKIyBhcyB0aGUgbW9kaWZ5IGFjdGlvbiBzeW50YXgsIGFzIGxvbmcgYXMgaXQgaXMgYSB0cmFpbGluZyBjb21tZW50CiMgMToxMDExICMgSSBNb2RpZmllZCB0aGlzIHJ1bGUgYWN0aW9uIGJlY2F1c2UgSSBjb3VsZCEKCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgYWN0aW9uIGZvciBNUyBhbmQgY3ZlIHJ1bGVzLCBub3RlIHRoZSB1c2Ugb2YgdGhlIDogCiMgaW4gY3ZlLiBUaGlzIHdpbGwgbW9kaWZ5IE1TMDktMDA4LCBjdmUgMjAwOS0wMjMzLCBidWd0cmFxIDIxMzAxLAojIGFuZCBhbGwgTVMwMCBhbmQgYWxsIGN2ZSAyMDAwIHJlbGF0ZWQgc2lkcyEgIFRoZXNlIHN1cHBvcnQgcmVndWxhciBleHByZXNzaW9uCiMgbWF0Y2hpbmcgb25seSBhZnRlciB5b3UgaGF2ZSBzcGVjaWZpZWQgd2hhdCB5b3UgYXJlIGxvb2tpbmcgZm9yLCBpLmUuIAojIE1TMDAtPHJlZ2V4PiBvciBjdmU6PHJlZ2V4PiwgdGhlIGZpcnN0IHNlY3Rpb24gQ0FOTk9UIGNvbnRhaW4gYSByZWd1bGFyCiMgZXhwcmVzc2lvbiAoTVNcZHsyfS1cZCspIHdpbGwgTk9UIHdvcmssIHVzZSB0aGUgcGNyZToga2V5d29yZCAoYmVsb3cpCiMgZm9yIHRoaXMuCiMgTVMwOS0wMDgsY3ZlOjIwMDktMDIzMyxidWd0cmFxOjIxMzAxLE1TMDAtXGQrLGN2ZToyMDAwLVxkKwoKIyBFeGFtcGxlIG9mIHVzaW5nIHRoZSBwY3JlOiBrZXl3b3JkIHRvIG1vZGlmeSBydWxlIGFjdGlvbi4gIHRoZSBwY3JlIGtleXdvcmQgCiMgYWxsb3dzIGZvciBmdWxsIHVzZSBvZiByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4LCB5b3UgZG8gbm90IG5lZWQgdG8gZGVzaWduYXRlCiMgd2l0aCAvIGFuZCBhbGwgcGNyZSBzZWFyY2hlcyBhcmUgdHJlYXRlZCBhcyBjYXNlIGluc2Vuc2l0aXZlLiBGb3IgbW9yZSBpbmZvcm1hdGlvbiAKIyBhYm91dCByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4OiBodHRwOi8vd3d3LnJlZ3VsYXItZXhwcmVzc2lvbnMuaW5mby8KIyBUaGUgZm9sbG93aW5nIGV4YW1wbGUgbW9kaWZpZXMgYWN0aW9uIGZvciBhbGwgTVMwNyB0aHJvdWdoIE1TMTAgCiMgcGNyZTpNUygwWzctOV18MTApLVxkKwoKIyBUaGUgZm9sbG93aW5nIGV4YW1wbGUgbW9kaWZpZXMgYWN0aW9uIGZvciBTbm9ydCBWUlQgcnVsZXMgdGFnZ2VkIHdpdGggSVBTIAojIFBvbGljeSBTZWN1cml0eSBhbmQgaXBzIGRyb3AuICBOb3RlIHRoZSBiZXR0ZXIgd2F5IHRvIGFjY29tcGxpc2ggdGhpcyBpcwojIGJ5IHNldHRpbmcgdGhlIG9wdGlvbiAiSVBTIFBvbGljeSBNb2RlIiB0byAicG9saWN5IiBvbiB0aGUgQ0FURUdPUklFUyB0YWIuCiMgLS0tLS0tLS0tLS0tLS0tLS0KIyBwY3JlOiJwY3JlOnNlY3VyaXR5LWlwc1xzKmRyb3AiCgojIEV4YW1wbGUgb2YgbW9kaWZ5aW5nIGFjdGlvbiBmb3Igc3BlY2lmaWMgY2F0ZWdvcmllcyBlbnRpcmVseQojIFZSVC13ZWItaWlzLEVULXNoZWxsY29kZSxFVC1lbWVyZ2luZ3RocmVhdHMtc210cCxDdXN0b20tc2hlbGxjb2RlLEN1c3RvbS1lbWVyZ2luZ3RocmVhdHMtc210cAoKIyBBbnkgb2YgdGhlIGFib3ZlIHZhbHVlcyBjYW4gYmUgb24gYSBzaW5nbGUgbGluZSBvciBtdWx0aXBsZSBsaW5lcywgd2hlbiAKIyBvbiBhIHNpbmdsZSBsaW5lIHRoZXkgc2ltcGx5IG5lZWQgdG8gYmUgc2VwYXJhdGVkIGJ5IGEgLAojIDE6OTgzNywxOjIyMC0xOjMyNjQsMzoxMzAxMC0zOjEzMDEzLHBjcmU6TVMoMFswLTddKS1cZCssTVMwOS0wMDgsY3ZlOjIwMDktMDIzMwoKIyBUaGUgbW9kaWZpY2F0aW9ucyBpbiB0aGlzIGZpbGUgYXJlIGZvciBzYW1wbGUvZXhhbXBsZSBwdXJwb3NlcyBvbmx5IGFuZAojIHNob3VsZCBub3QgYWN0aXZlbHkgYmUgdXNlZCwgeW91IG5lZWQgdG8gbW9kaWZ5IHRoaXMgZmlsZSB0byBmaXQgeW91ciAKIyBlbnZpcm9ubWVudC4K</content>
+				</item>
+				<item>
+					<name>rejectsid-sample.conf</name>
+					<modtime>1711481917</modtime>
+					<content>IyBOb3RlOiBUaGlzIGZpbGUgaXMgdXNlZCB0byBzcGVjaWZ5IHdoYXQgcnVsZXMgeW91IHdpc2ggdG8gYmUgc2V0IHRvIGhhdmUKIyBhbiBhY3Rpb24gb2YgcmVqZWN0IHJhdGhlciB0aGFuIGFsZXJ0LgoKIyBFeGFtcGxlIG9mIG1vZGlmeWluZyBhY3Rpb24gZm9yIGluZGl2aWR1YWwgcnVsZXMKIyAxOjEwMzQsMTo5ODM3LDE6MTI3MCwxOjMzOTAsMTo3MTAsMToxMjQ5LDM6MTMwMTAKCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgYWN0aW9uIGZvciBydWxlIHJhbmdlcwojIDE6MjIwLTE6MzI2NCwzOjEzMDEwLTM6MTMwMTMKCiMgQ29tbWVudHMgYXJlIGFsbG93ZWQgaW4gdGhpcyBmaWxlLCBhbmQgY2FuIGFsc28gYmUgb24gdGhlIHNhbWUgbGluZQojIGFzIHRoZSBtb2RpZnkgYWN0aW9uIHN5bnRheCwgYXMgbG9uZyBhcyBpdCBpcyBhIHRyYWlsaW5nIGNvbW1lbnQKIyAxOjEwMTEgIyBJIE1vZGlmaWVkIHRoaXMgcnVsZSBhY3Rpb24gdG8gcmVqZWN0IGJlY2F1c2UgSSBjb3VsZCEKCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgYWN0aW9uIGZvciBNUyBhbmQgY3ZlIHJ1bGVzLCBub3RlIHRoZSB1c2Ugb2YgdGhlIDogCiMgaW4gY3ZlLiBUaGlzIHdpbGwgbW9kaWZ5IE1TMDktMDA4LCBjdmUgMjAwOS0wMjMzLCBidWd0cmFxIDIxMzAxLAojIGFuZCBhbGwgTVMwMCBhbmQgYWxsIGN2ZSAyMDAwIHJlbGF0ZWQgc2lkcyEgIFRoZXNlIHN1cHBvcnQgcmVndWxhciBleHByZXNzaW9uCiMgbWF0Y2hpbmcgb25seSBhZnRlciB5b3UgaGF2ZSBzcGVjaWZpZWQgd2hhdCB5b3UgYXJlIGxvb2tpbmcgZm9yLCBpLmUuIAojIE1TMDAtPHJlZ2V4PiBvciBjdmU6PHJlZ2V4PiwgdGhlIGZpcnN0IHNlY3Rpb24gQ0FOTk9UIGNvbnRhaW4gYSByZWd1bGFyCiMgZXhwcmVzc2lvbiAoTVNcZHsyfS1cZCspIHdpbGwgTk9UIHdvcmssIHVzZSB0aGUgcGNyZToga2V5d29yZCAoYmVsb3cpCiMgZm9yIHRoaXMuCiMgTVMwOS0wMDgsY3ZlOjIwMDktMDIzMyxidWd0cmFxOjIxMzAxLE1TMDAtXGQrLGN2ZToyMDAwLVxkKwoKIyBFeGFtcGxlIG9mIHVzaW5nIHRoZSBwY3JlOiBrZXl3b3JkIHRvIG1vZGlmeSBydWxlIGFjdGlvbi4gIHRoZSBwY3JlIGtleXdvcmQgCiMgYWxsb3dzIGZvciBmdWxsIHVzZSBvZiByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4LCB5b3UgZG8gbm90IG5lZWQgdG8gZGVzaWduYXRlCiMgd2l0aCAvIGFuZCBhbGwgcGNyZSBzZWFyY2hlcyBhcmUgdHJlYXRlZCBhcyBjYXNlIGluc2Vuc2l0aXZlLiBGb3IgbW9yZSBpbmZvcm1hdGlvbiAKIyBhYm91dCByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4OiBodHRwOi8vd3d3LnJlZ3VsYXItZXhwcmVzc2lvbnMuaW5mby8KIyBUaGUgZm9sbG93aW5nIGV4YW1wbGUgbW9kaWZpZXMgYWN0aW9uIGZvciBhbGwgTVMwNyB0aHJvdWdoIE1TMTAgCiMgcGNyZTpNUygwWzctOV18MTApLVxkKwoKIyBUaGUgZm9sbG93aW5nIGV4YW1wbGUgbW9kaWZpZXMgYWN0aW9uIHRvIHJlamVjdCBmb3IgU25vcnQgVlJUIHJ1bGVzIHRhZ2dlZCB3aXRoIAojIElQUyBQb2xpY3kgU2VjdXJpdHkgYW5kIGlwcyBkcm9wLgojIC0tLS0tLS0tLS0tLS0tLS0tCiMgcGNyZToicGNyZTpzZWN1cml0eS1pcHNccypkcm9wIgoKIyBFeGFtcGxlIG9mIG1vZGlmeWluZyBhY3Rpb24gZm9yIHNwZWNpZmljIGNhdGVnb3JpZXMgZW50aXJlbHkKIyBWUlQtd2ViLWlpcyxFVC1zaGVsbGNvZGUsRVQtZW1lcmdpbmd0aHJlYXRzLXNtdHAsQ3VzdG9tLXNoZWxsY29kZSxDdXN0b20tZW1lcmdpbmd0aHJlYXRzLXNtdHAKCiMgQW55IG9mIHRoZSBhYm92ZSB2YWx1ZXMgY2FuIGJlIG9uIGEgc2luZ2xlIGxpbmUgb3IgbXVsdGlwbGUgbGluZXMsIHdoZW4gCiMgb24gYSBzaW5nbGUgbGluZSB0aGV5IHNpbXBseSBuZWVkIHRvIGJlIHNlcGFyYXRlZCBieSBhICwKIyAxOjk4MzcsMToyMjAtMTozMjY0LDM6MTMwMTAtMzoxMzAxMyxwY3JlOk1TKDBbMC03XSktXGQrLE1TMDktMDA4LGN2ZToyMDA5LTAyMzMKCiMgVGhlIG1vZGlmaWNhdGlvbnMgaW4gdGhpcyBmaWxlIGFyZSBmb3Igc2FtcGxlL2V4YW1wbGUgcHVycG9zZXMgb25seSBhbmQKIyBzaG91bGQgbm90IGFjdGl2ZWx5IGJlIHVzZWQsIHlvdSBuZWVkIHRvIG1vZGlmeSB0aGlzIGZpbGUgdG8gZml0IHlvdXIgCiMgZW52aXJvbm1lbnQuCg==</content>
+				</item>
+				<item>
+					<name>enablesid-sample.conf</name>
+					<modtime>1711481917</modtime>
+					<content>IyBleGFtcGxlIGVuYWJsZXNpZC5jb25mCgojIEV4YW1wbGUgb2YgbW9kaWZ5aW5nIHN0YXRlIGZvciBpbmRpdmlkdWFsIHJ1bGVzCiMgMToxMDM0LDE6OTgzNywxOjEyNzAsMTozMzkwLDE6NzEwLDE6MTI0OSwzOjEzMDEwCgojIEV4YW1wbGUgb2YgbW9kaWZ5aW5nIHN0YXRlIGZvciBydWxlIHJhbmdlcwojIDE6MjIwLTE6MzI2NCwzOjEzMDEwLTM6MTMwMTMKCiMgQ29tbWVudHMgYXJlIGFsbG93ZWQgaW4gdGhpcyBmaWxlLCBhbmQgY2FuIGFsc28gYmUgb24gdGhlIHNhbWUgbGluZQojIEFzIHRoZSBtb2RpZnkgc3RhdGUgc3ludGF4LCBhcyBsb25nIGFzIGl0IGlzIGEgdHJhaWxpbmcgY29tbWVudAojIDE6MTAxMSAjIEkgRGlzYWJsZWQgdGhpcyBydWxlIGJlY2F1c2UgSSBjb3VsZCEKCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgc3RhdGUgZm9yIE1TIGFuZCBjdmUgcnVsZXMsIG5vdGUgdGhlIHVzZSBvZiB0aGUgOiAKIyBpbiBjdmUuIFRoaXMgd2lsbCBtb2RpZnkgTVMwOS0wMDgsIGN2ZSAyMDA5LTAyMzMsIGJ1Z3RyYXEgMjEzMDEsCiMgYW5kIGFsbCBNUzAwIGFuZCBhbGwgY3ZlIDIwMDAgcmVsYXRlZCBzaWRzISAgVGhlc2Ugc3VwcG9ydCByZWd1bGFyIGV4cHJlc3Npb24KIyBtYXRjaGluZyBvbmx5IGFmdGVyIHlvdSBoYXZlIHNwZWNpZmllZCB3aGF0IHlvdSBhcmUgbG9va2luZyBmb3IsIGkuZS4gCiMgTVMwMC08cmVnZXg+IG9yIGN2ZTo8cmVnZXg+LCB0aGUgZmlyc3Qgc2VjdGlvbiBDQU5OT1QgY29udGFpbiBhIHJlZ3VsYXIKIyBleHByZXNzaW9uIChNU1xkezJ9LVxkKykgd2lsbCBOT1Qgd29yaywgdXNlIHRoZSBwY3JlOiBrZXl3b3JkIChiZWxvdykKIyBmb3IgdGhpcy4KIyBNUzA5LTAwOCxjdmU6MjAwOS0wMjMzLGJ1Z3RyYXE6MjEzMDEsTVMwMC1cZCssY3ZlOjIwMDAtXGQrCgojIEV4YW1wbGUgb2YgdXNpbmcgdGhlIHBjcmU6IGtleXdvcmQgdG8gbW9kaWZ5IHJ1bGVzdGF0ZS4gIHRoZSBwY3JlIGtleXdvcmQgCiMgYWxsb3dzIGZvciBmdWxsIHVzZSBvZiByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4LCB5b3UgZG8gbm90IG5lZWQgdG8gZGVzaWduYXRlCiMgd2l0aCAvIGFuZCBhbGwgcGNyZSBzZWFyY2hlcyBhcmUgdHJlYXRlZCBhcyBjYXNlIGluc2Vuc2l0aXZlLiBGb3IgbW9yZSBpbmZvcm1hdGlvbiAKIyBhYm91dCByZWd1bGFyIGV4cHJlc3Npb24gc3ludGF4OiBodHRwOi8vd3d3LnJlZ3VsYXItZXhwcmVzc2lvbnMuaW5mby8KIyBUaGUgZm9sbG93aW5nIGV4YW1wbGUgbW9kaWZpZXMgc3RhdGUgZm9yIGFsbCBNUzA3IHRocm91Z2ggTVMxMCAKIyBwY3JlOk1TKDBbNy05XXwxMCktXGQrCiMgcGNyZToiSm9vbWxhIgoKIyBFeGFtcGxlIG9mIG1vZGlmeWluZyBzdGF0ZSBmb3Igc3BlY2lmaWMgY2F0ZWdvcmllcyBlbnRpcmVseS4KIyAic25vcnRfIiBsaW1pdHMgdG8gU25vcnQgU3Vic2NyaWJlciBydWxlcywgImVtZXJnaW5nLSIgbGltaXRzIHRvIAojIEVtZXJnaW5nIFRocmVhdHMgT3BlbiBydWxlcywgImV0cHJvLSIgbGltaXRzIHRvIEVULVBSTyBydWxlcy4KIyAic2hlbGxjb2RlIiB3aXRoIG5vIHByZWZpeCB3b3VsZCBtYXRjaCBpbiBhbnkgdmVuZG9yIHNldC4KIyBzbm9ydF93ZWItaWlzLGVtZXJnaW5nLXNoZWxsY29kZSxldHByby1pbWFwLHNoZWxsY29kZQoKIyBBbnkgb2YgdGhlIGFib3ZlIHZhbHVlcyBjYW4gYmUgb24gYSBzaW5nbGUgbGluZSBvciBtdWx0aXBsZSBsaW5lcywgd2hlbiAKIyBvbiBhIHNpbmdsZSBsaW5lIHRoZXkgc2ltcGx5IG5lZWQgdG8gYmUgc2VwYXJhdGVkIGJ5IGEgLAojIDE6OTgzNywxOjIyMC0xOjMyNjQsMzoxMzAxMC0zOjEzMDEzLHBjcmU6TVMoMFswLTddKS1cZCssTVMwOS0wMDgsY3ZlOjIwMDktMDIzMwoK</content>
+				</item>
+				<item>
+					<name>disablesid-sample.conf</name>
+					<modtime>1711481917</modtime>
+					<content>IyBleGFtcGxlIGRpc2FibGVzaWQuY29uZgoKIyBFeGFtcGxlIG9mIG1vZGlmeWluZyBzdGF0ZSBmb3IgaW5kaXZpZHVhbCBydWxlcwojIDE6MTAzNCwxOjk4MzcsMToxMjcwLDE6MzM5MCwxOjcxMCwxOjEyNDksMzoxMzAxMAoKIyBFeGFtcGxlIG9mIG1vZGlmeWluZyBzdGF0ZSBmb3IgcnVsZSByYW5nZXMKIyAxOjIyMC0xOjMyNjQsMzoxMzAxMC0zOjEzMDEzCgojIENvbW1lbnRzIGFyZSBhbGxvd2VkIGluIHRoaXMgZmlsZSwgYW5kIGNhbiBhbHNvIGJlIG9uIHRoZSBzYW1lIGxpbmUKIyBBcyB0aGUgbW9kaWZ5IHN0YXRlIHN5bnRheCwgYXMgbG9uZyBhcyBpdCBpcyBhIHRyYWlsaW5nIGNvbW1lbnQKIyAxOjEwMTEgIyBJIERpc2FibGVkIHRoaXMgcnVsZSBiZWNhdXNlIEkgY291bGQhCgojIEV4YW1wbGUgb2YgbW9kaWZ5aW5nIHN0YXRlIGZvciBNUyBhbmQgY3ZlIHJ1bGVzLCBub3RlIHRoZSB1c2Ugb2YgdGhlIDogCiMgaW4gY3ZlLiBUaGlzIHdpbGwgbW9kaWZ5IE1TMDktMDA4LCBjdmUgMjAwOS0wMjMzLCBidWd0cmFxIDIxMzAxLAojIGFuZCBhbGwgTVMwMCBhbmQgYWxsIGN2ZSAyMDAwIHJlbGF0ZWQgc2lkcyEgIFRoZXNlIHN1cHBvcnQgcmVndWxhciBleHByZXNzaW9uCiMgbWF0Y2hpbmcgb25seSBhZnRlciB5b3UgaGF2ZSBzcGVjaWZpZWQgd2hhdCB5b3UgYXJlIGxvb2tpbmcgZm9yLCBpLmUuIAojIE1TMDAtPHJlZ2V4PiBvciBjdmU6PHJlZ2V4PiwgdGhlIGZpcnN0IHNlY3Rpb24gQ0FOTk9UIGNvbnRhaW4gYSByZWd1bGFyCiMgZXhwcmVzc2lvbiAoTVNcZHsyfS1cZCspIHdpbGwgTk9UIHdvcmssIHVzZSB0aGUgcGNyZToga2V5d29yZCAoYmVsb3cpCiMgZm9yIHRoaXMuCiMgTVMwOS0wMDgsY3ZlOjIwMDktMDIzMyxidWd0cmFxOjIxMzAxLE1TMDAtXGQrLGN2ZToyMDAwLVxkKwoKIyBFeGFtcGxlIG9mIHVzaW5nIHRoZSBwY3JlOiBrZXl3b3JkIHRvIG1vZGlmeSBydWxlc3RhdGUuICB0aGUgcGNyZSBrZXl3b3JkIAojIGFsbG93cyBmb3IgZnVsbCB1c2Ugb2YgcmVndWxhciBleHByZXNzaW9uIHN5bnRheCwgeW91IGRvIG5vdCBuZWVkIHRvIGRlc2lnbmF0ZQojIHdpdGggLyBhbmQgYWxsIHBjcmUgc2VhcmNoZXMgYXJlIHRyZWF0ZWQgYXMgY2FzZSBpbnNlbnNpdGl2ZS4gRm9yIG1vcmUgaW5mb3JtYXRpb24gCiMgYWJvdXQgcmVndWxhciBleHByZXNzaW9uIHN5bnRheDogaHR0cDovL3d3dy5yZWd1bGFyLWV4cHJlc3Npb25zLmluZm8vCiMgVGhlIGZvbGxvd2luZyBleGFtcGxlIG1vZGlmaWVzIHN0YXRlIGZvciBhbGwgTVMwNyB0aHJvdWdoIE1TMTAgCiMgcGNyZTpNUygwWzctOV18MTApLVxkKwojIHBjcmU6Ikpvb21sYSIKCiMgRXhhbXBsZSBvZiBtb2RpZnlpbmcgc3RhdGUgZm9yIHNwZWNpZmljIGNhdGVnb3JpZXMgZW50aXJlbHkuCiMgInNub3J0XyIgbGltaXRzIHRvIFNub3J0IFN1YnNjcmliZXIgcnVsZXMsICJlbWVyZ2luZy0iIGxpbWl0cyB0byAKIyBFbWVyZ2luZyBUaHJlYXRzIE9wZW4gcnVsZXMsICJldHByby0iIGxpbWl0cyB0byBFVC1QUk8gcnVsZXMuCiMgInNoZWxsY29kZSIgd2l0aCBubyBwcmVmaXggd291bGQgbWF0Y2ggaW4gYW55IHZlbmRvciBzZXQuCiMgc25vcnRfd2ViLWlpcyxlbWVyZ2luZy1zaGVsbGNvZGUsZXRwcm8taW1hcCxzaGVsbGNvZGUKCiMgQW55IG9mIHRoZSBhYm92ZSB2YWx1ZXMgY2FuIGJlIG9uIGEgc2luZ2xlIGxpbmUgb3IgbXVsdGlwbGUgbGluZXMsIHdoZW4gCiMgb24gYSBzaW5nbGUgbGluZSB0aGV5IHNpbXBseSBuZWVkIHRvIGJlIHNlcGFyYXRlZCBieSBhICwKIyAxOjk4MzcsMToyMjAtMTozMjY0LDM6MTMwMTAtMzoxMzAxMyxwY3JlOk1TKDBbMC03XSktXGQrLE1TMDktMDA4LGN2ZToyMDA5LTAyMzMKCiMgVGhlIG1vZGlmaWNhdGlvbnMgaW4gdGhpcyBmaWxlIGFyZSBmb3Igc2FtcGxlL2V4YW1wbGUgcHVycG9zZXMgb25seSBhbmQKIyBzaG91bGQgbm90IGFjdGl2ZWx5IGJlIHVzZWQsIHlvdSBuZWVkIHRvIG1vZGlmeSB0aGlzIGZpbGUgdG8gZml0IHlvdXIgCiMgZW52aXJvbm1lbnQuCgo=</content>
+				</item>
+			</sid_mgmt_lists>
+			<sid_list_migration>2</sid_list_migration>
+			<rule_update_starttime>00:24</rule_update_starttime>
+		</snortglobal>
+		<squidcache>
+			<config>
+				<nocache></nocache>
+				<cache_replacement_policy>heap LFUDA</cache_replacement_policy>
+				<cache_swap_low>90</cache_swap_low>
+				<cache_swap_high>95</cache_swap_high>
+				<donotcache></donotcache>
+				<enable_offline></enable_offline>
+				<ext_cachemanager></ext_cachemanager>
+				<harddisk_cache_size>100</harddisk_cache_size>
+				<harddisk_cache_system>ufs</harddisk_cache_system>
+				<level1_subdirs>16</level1_subdirs>
+				<harddisk_cache_location>/var/squid/cache</harddisk_cache_location>
+				<minimum_object_size>0</minimum_object_size>
+				<maximum_object_size>4</maximum_object_size>
+				<memory_cache_size>64</memory_cache_size>
+				<maximum_objsize_in_mem>256</maximum_objsize_in_mem>
+				<memory_replacement_policy>heap GDSF</memory_replacement_policy>
+				<cache_dynamic_content></cache_dynamic_content>
+				<custom_refresh_patterns></custom_refresh_patterns>
+			</config>
+		</squidcache>
+		<squidauth>
+			<config>
+				<auth_method>none</auth_method>
+			</config>
+		</squidauth>
+		<squid>
+			<config>
+				<enable_squid>on</enable_squid>
+				<keep_squid_data>on</keep_squid_data>
+				<listenproto>inet</listenproto>
+				<carpstatusvid>none</carpstatusvid>
+				<active_interface>wan</active_interface>
+				<outgoing_interface>auto</outgoing_interface>
+				<proxy_port>3128</proxy_port>
+				<icp_port></icp_port>
+				<allow_interface>on</allow_interface>
+				<dns_v4_first>on</dns_v4_first>
+				<disable_pinger></disable_pinger>
+				<dns_nameservers></dns_nameservers>
+				<extraca>none</extraca>
+				<transparent_proxy></transparent_proxy>
+				<transparent_active_interface>lan</transparent_active_interface>
+				<private_subnet_proxy_off></private_subnet_proxy_off>
+				<defined_ip_proxy_off></defined_ip_proxy_off>
+				<defined_ip_proxy_off_dest></defined_ip_proxy_off_dest>
+				<ssl_proxy></ssl_proxy>
+				<sslproxy_mitm_mode>splicewhitelist</sslproxy_mitm_mode>
+				<ssl_active_interface>lan</ssl_active_interface>
+				<ssl_proxy_port></ssl_proxy_port>
+				<sslproxy_compatibility_mode>modern</sslproxy_compatibility_mode>
+				<dhparams_size>2048</dhparams_size>
+				<dca>none</dca>
+				<sslcrtd_children></sslcrtd_children>
+				<interception_checks></interception_checks>
+				<interception_adapt></interception_adapt>
+				<log_enabled></log_enabled>
+				<log_dir>/var/squid/logs</log_dir>
+				<log_rotate></log_rotate>
+				<log_sqd></log_sqd>
+				<visible_hostname>localhost</visible_hostname>
+				<admin_email>admin@localhost</admin_email>
+				<error_language>en</error_language>
+				<xforward_mode>on</xforward_mode>
+				<disable_via></disable_via>
+				<uri_whitespace>strip</uri_whitespace>
+				<disable_squidversion></disable_squidversion>
+				<custom_options></custom_options>
+				<custom_options_squid3></custom_options_squid3>
+				<custom_options2_squid3></custom_options2_squid3>
+				<custom_options3_squid3></custom_options3_squid3>
+			</config>
+		</squid>
+		<squidnac>
+			<config>
+				<allowed_subnets>MTkyLjE2OC4xLjAvMjQ=</allowed_subnets>
+				<unrestricted_hosts></unrestricted_hosts>
+				<banned_hosts></banned_hosts>
+				<whitelist></whitelist>
+				<blacklist></blacklist>
+				<block_user_agent></block_user_agent>
+				<block_reply_mime_type></block_reply_mime_type>
+				<addtl_ports></addtl_ports>
+				<addtl_sslports></addtl_sslports>
+				<google_accounts></google_accounts>
+				<youtube_restrict>none</youtube_restrict>
+			</config>
+		</squidnac>
+		<pfblockerng>
+			<config>
+				<enable_cb>on</enable_cb>
+				<pfb_keep>on</pfb_keep>
+				<pfb_reuse></pfb_reuse>
+				<pfb_interval>1</pfb_interval>
+				<pfb_min>0</pfb_min>
+				<pfb_hour>0</pfb_hour>
+				<pfb_dailystart>0</pfb_dailystart>
+				<skipfeed>0</skipfeed>
+				<log_max_log>20000</log_max_log>
+				<log_max_errlog>20000</log_max_errlog>
+				<log_max_extraslog>20000</log_max_extraslog>
+				<log_max_ip_blocklog>20000</log_max_ip_blocklog>
+				<log_max_ip_permitlog>20000</log_max_ip_permitlog>
+				<log_max_ip_matchlog>20000</log_max_ip_matchlog>
+				<log_max_dnslog>20000</log_max_dnslog>
+				<log_max_dnsbl_parse_err>20000</log_max_dnsbl_parse_err>
+				<log_max_dnsreplylog>20000</log_max_dnsreplylog>
+				<log_max_unilog>20000</log_max_unilog>
+			</config>
+		</pfblockerng>
+		<pfblockerngipsettings>
+			<config>
+				<enable_dup>on</enable_dup>
+				<suppression>on</suppression>
+				<inbound_interface>wan,openvpn</inbound_interface>
+				<inbound_deny_action>block</inbound_deny_action>
+				<outbound_interface>wan,openvpn</outbound_interface>
+				<outbound_deny_action>reject</outbound_deny_action>
+				<pass_order>order_0</pass_order>
+				<enable_agg>on</enable_agg>
+				<enable_log></enable_log>
+				<ip_placeholder>127.1.7.7</ip_placeholder>
+				<maxmind_locale>en</maxmind_locale>
+				<database_cc></database_cc>
+				<maxmind_account></maxmind_account>
+				<maxmind_key></maxmind_key>
+				<asn_reporting>disabled</asn_reporting>
+				<enable_float></enable_float>
+				<autorule_suffix>autorule</autorule_suffix>
+				<killstates></killstates>
+				<v4suppression></v4suppression>
+			</config>
+		</pfblockerngipsettings>
+		<pfblockerngdnsblsettings>
+			<config>
+				<pfb_dnsvip>10.10.10.1</pfb_dnsvip>
+				<pfb_dnsport>8081</pfb_dnsport>
+				<pfb_dnsport_ssl>8443</pfb_dnsport_ssl>
+				<pfb_dnsblv6></pfb_dnsblv6>
+				<pfb_dnsbl>on</pfb_dnsbl>
+				<suppression>czMuYW1hem9uYXdzLmNvbQ0KczMtMS5hbWF6b25hd3MuY29tICMgQ05BTUUgZm9yIChzMy5hbWF6
+b25hd3MuY29tKQ0KLmdpdGh1Yi5jb20NCi5naXRodWJ1c2VyY29udGVudC5jb20gDQpnaXRodWIu
+bWFwLmZhc3RseS5uZXQgIyBDTkFNRSBmb3IgKHJhdy5naXRodWJ1c2VyY29udGVudC5jb20pDQou
+Z2l0bGFiLmNvbQ0KLnNvdXJjZWZvcmdlLm5ldA0KLmZscy1uYS5hbWF6b24uY29tICMgYWxleGEN
+Ci5jb250cm9sLmtvY2hhdmEuY29tICMgYWxleGEgMg0KLmRldmljZS1tZXRyaWNzLXVzLTIuYW1h
+em9uLmNvbSAjIGFsZXhhIDMNCi5hbWF6b24tYWRzeXN0ZW0uY29tICMgYW1hem9uIGFwcCBhZHMN
+Ci5weC5tb2F0YWRzLmNvbSAjIGFtYXpvbiBhcHAgMg0KLndpbGRjYXJkLm1vYXRhZHMuY29tLmVk
+Z2VrZXkubmV0ICMgQ05BTUUgZm9yIChweC5tb2F0YWRzLmNvbSkNCi5lMTMxMzYuZy5ha2FtYWll
+ZGdlLm5ldCAjIENOQU1FIGZvciAocHgubW9hdGFkcy5jb20pDQouc2VjdXJlLWdsLmltcndvcmxk
+d2lkZS5jb20gIyBhbWF6b24gYXBwIDMNCi5waXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tICMgYW1h
+em9uIGFwcCA0DQouYW55Y2FzdC5waXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tICMgQ05BTUUgZm9y
+IChwaXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tKQ0KLmJzLnNlcnZpbmctc3lzLmNvbSAjIGFtYXpv
+biBhcHAgNQ0KLmJzLmV5ZWJsYXN0ZXIuYWthZG5zLm5ldCAjIENOQU1FIGZvciAoYnMuc2Vydmlu
+Zy1zeXMuY29tKQ0KLmJzbGEuZXllYmxhc3Rlci5ha2FkbnMubmV0ICMgQ05BTUUgZm9yIChicy5z
+ZXJ2aW5nLXN5cy5jb20pDQouYWRzYWZlcHJvdGVjdGVkLmNvbSAjIGFtYXpvbiBhcHAgNg0KLmFu
+eWNhc3Quc3RhdGljLmFkc2FmZXByb3RlY3RlZC5jb20gIyBDTkFNRSBmb3IgKHN0YXRpYy5hZHNh
+ZmVwcm90ZWN0ZWQuY29tKQ0KZ29vZ2xlLmNvbQ0Kd3d3Lmdvb2dsZS5jb20NCnlvdXR1YmUuY29t
+DQp3d3cueW91dHViZS5jb20NCnlvdXR1YmUtdWkubC5nb29nbGUuY29tICMgQ05BTUUgZm9yICh5
+b3V0dWJlLmNvbSkNCnN0YWNrb3ZlcmZsb3cuY29tDQp3d3cuc3RhY2tvdmVyZmxvdy5jb20NCmRy
+b3Bib3guY29tDQp3d3cuZHJvcGJveC5jb20NCnd3dy5kcm9wYm94LWRucy5jb20gIyBDTkFNRSBm
+b3IgKGRyb3Bib3guY29tKQ0KLmFkc2FmZXByb3RlY3RlZC5jb20NCmNvbnRyb2wua29jaGF2YS5j
+b20NCnNlY3VyZS1nbC5pbXJ3b3JsZHdpZGUuY29tDQpwYnMudHdpbWcuY29tICMgdHdpdHRlciBp
+bWFnZXMNCnd3dy5wYnMudHdpbWcuY29tICMgdHdpdHRlciBpbWFnZXMNCmNzMTk2LndhYy5lZGdl
+Y2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczItd2FjLmFwci04MzE1
+LmVkZ2VjYXN0ZG5zLm5ldCAjIENOQU1FIGZvciAocGJzLnR3aW1nLmNvbSkNCmNzMi13YWMtdXMu
+ODMxNS5lY2Rucy5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczQ1LndhYy5lZGdl
+Y2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczItd2FjLmFwci04MzE1
+LmVkZ2VjYXN0ZG5zLm5ldCAjIENOQU1FIGZvciAocGJzLnR3aW1nLmNvbSkNCmNzMi13YWMtdXMu
+ODMxNS5lY2Rucy5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczQ1LndhYy5lZGdl
+Y2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQoucGZzZW5zZS5vcmcNCi5u
+ZXRnYXRlLmNvbQ0K</suppression>
+			</config>
+		</pfblockerngdnsblsettings>
+		<pfblockerngdnsbl>
+			<config>
+				<aliasname>ADs_Basic</aliasname>
+				<description><![CDATA[ADs Basic - Collection of ADvertisement Domain Feeds.]]></description>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts</url>
+					<header>StevenBlack_ADs</header>
+				</row>
+				<action>unbound</action>
+				<cron>EveryDay</cron>
+				<logging>enabled</logging>
+				<order>default</order>
+				<dow>1</dow>
+			</config>
+		</pfblockerngdnsbl>
+		<pfblockernglistsv4>
+			<config>
+				<aliasname>PRI1</aliasname>
+				<description><![CDATA[PRI1 - Collection of Feeds from the most reputable blocklist providers. (Primary tier)]]></description>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://feodotracker.abuse.ch/downloads/ipblocklist_recommended.txt</url>
+					<header>Abuse_Feodo_C2</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://sslbl.abuse.ch/blacklist/sslipblacklist.txt</url>
+					<header>Abuse_SSLBL</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://cinsarmy.com/list/ci-badguys.txt</url>
+					<header>CINS_army</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt</url>
+					<header>ET_Block</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://rules.emergingthreats.net/blockrules/compromised-ips.txt</url>
+					<header>ET_Comp</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://isc.sans.edu/block.txt</url>
+					<header>ISC_Block</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://www.spamhaus.org/drop/drop.txt</url>
+					<header>Spamhaus_Drop</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://www.spamhaus.org/drop/edrop.txt</url>
+					<header>Spamhaus_eDrop</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://talosintelligence.com/documents/ip-blacklist</url>
+					<header>Talos_BL</header>
+				</row>
+				<action>Deny_Outbound</action>
+				<cron>01hour</cron>
+				<aliaslog>enabled</aliaslog>
+				<dow>1</dow>
+			</config>
+		</pfblockernglistsv4>
+		<pfblockerngblacklist></pfblockerngblacklist>
+		<pfblockerngglobal></pfblockerngglobal>
+		<pfblockerngsafesearch></pfblockerngsafesearch>
 	</installedpackages>
 	<hasync></hasync>
 	<nat>
@@ -1053,22 +1706,105 @@
 			<mode>advanced</mode>
 		</outbound>
 	</nat>
-	<sshdata>
-		<sshkeyfile>
-			<filename>ssh_host_rsa_key</filename>
-			<xmldata>ldfHrqxKsgbgOU9x5ugICs8QT+G9m+G9raIwT9+1tu6drZZ6p4SUUsIk49NPxL//fhcrSE/jH9MSDNeV/7GcZ8B4wj+qEP8c/gtkKDtkk3Gn3GNLov5ddALzs1gJ/2Sj/7MVspHeE5v5/8V+H048frbFnSP1O58Ao/lzdHw//nmxFpjmw79bZmzzOHm9rkZm3046wXPM4nLlKSCBK20nfpKsukJDjn1KN9YT2LPn3mwN6CP51dsDPpezefK+Rkr2EAjM3QSQXb6gumJnR0XGEybv06cS2KUg3uqoBS1lMuIBuas6k8LVD95EZxYe5DIvl9Ix1/pGUxxFFKfQinKYEX42CJXbyw/xfi9wTBQi48BRyPV6ebFAc9Jy+Xw9GE/MHgX9npvtcbDDcqRPerUJUqAaFJosJS2RNphbLSo1EXL1Su3W3ugpNw1MEfEAJOlGPsueFWRrDFuXmYU8qPcdRPlyZ5QlLuhwJtFxY7n5TnZnC7ok1qiaqdHCpXcj9htvYmMA2eKa3R6lYlCVDWlPzxw6qwgDihblBwExM4rDpw5dUsYm4sOjj9uGeATyagsfcW4i25VL3zxQbeeL7ZS+yNMbrWmDblJbN8+Zv1ZshUcXf5ZUfYtXsHISftjLcE+9GyYrvn9IOxl7VZRFNASuq3XRXQdpGWPToKT6dlaDYkdtJJghjEqZdzWkW6AoY5YydH3Obr032rt6VU5/P/UVIkxxRQG3JUXnYiTWiRTRNaF2z9o2HjF1a+qdHdZdTi5iuee+q/qHo5mGpilbtsDVIWGVQHSwMN7VBMzbY+qNO9f7YdPgPZHL1nPcM8qJcEBmM3Jn30qnrZ4PMkanK2QtiDv1tKzeOfuC2YJSIujoAeqHtL2YisirXuvYf4zLOWrMWqTc8f8oG/iN9t/LBn6j/feygd9o/71s4Dfafy8b+I3238sGfqP997KB32j/vWzgN9p/Lxv4jfbfywZ+o/0jm+G/2fwnvL+o6Wfqflq5kIRCsMIu+NijbrMWBR6EwaqHeQDi4aUEbBhR4zo6oSa4JYqjueoJV5xPb14YJxf96tETOi/bpxlIx0MRHmaN+LBKmV2kywb3eQD2yZ/R3jUC+4r1jW5fzRUzBv3YQoupKzlvqhLCyHzJq92RktBXzS0z5/7grZlcmSd2j9A668BxeyDdCSlnVvaklTDP+Y4WGe26xhiFqQNlE7mwD+kwV59ur0Pkg8SdXx+YyfO4xfGHHwc8DXzvySaeMQsZkJg0a7FOXsOLnMkivg0uhDTvzBL2sB7ojpXanw817hwNgf79KKITlqWiuKRdAyqrZ1+vXUOy2IXnJpY/ir+GoKfH7klQL9/fOqax0yXCq5D/kBCaYyIXEaEynAHtR8YH7DioBpggxfEOhK/EdJVNUeNhFS0hXbMAgjXaYyOnSxCItFasZ+NBaJjCJST0tfUPA8OcvESCQd19ACEhBOPGgV/kbxWeH4J3y0uUQyluOWOFY3CNz/Lr6ryuY4NvjZfg2lDq8m7CZ8LWVPsK3hINiCWLapd7T3cbwTPzsL7VzWk3PQsC5KceP6GJqLEmhNUZTAU6LilqFAhLGjuq/uR7jS/pNacATmyv+43zZGXw3zqm7DdZ7hglBCZF9OwOuP3mPFPfe96WXNgmQds1KoW4yTMo1aLoTQ5ahhS4P61loqtqSuFTDsQrVv60HuI9TZ6pvl3jLA6CVTgXTdpWYOm12x1wf+QFYeW7Bz5RGlbdDaBGQ0jtPCDgHsM9Y366nwC9sc/UQfLDdcKBimXWaJ4opKexcLTtDYdLazro4GN2xzU+KnTjC+Df2mrPcAMhFOppYDeolmUOeItsIeluxXP1wtfLFK4OwdH0acCXu/bcsD+uVsdpcJ64VF7TFjig660s5JoRsINBg9wx0nD19caCpq2vW+sXwSsm4/czyxWOphObaK5got+taBOdh5yjXUIWBoje7hPWW2FL8E6qSRbUwGRju83FxbwWWEgi9vJC7PFBDO/bn7G9JPrdZIg7obYNywwgQiveDUhujPE2Q4EWagnd86fVYxltw6NTLGA3P44PsVV5REE9SvrTBhXYiLhsZESLNI2qUIlpW8A60Lxx6N04xpKT+h6AGU9fUJt3C4amBjuykNTzbrilRd1myelRcB2/cXxeKkI4yuKlyGX5GIsMKOBvTnj4OcZnM4LxA4QtcqE/Ea69uybb1kbS2eIj028v1PJxcF7YsVHGNV+pWrHUQVrm2wxXoAoI/5GftMFhN/tAFxXf9jG4LUdri6Ru/Rd33XMlFMhlpGkqdslxhjy3FIZGZHudQmtOQzAM9CA9NGiqfXa2eRA+Ao+ltCUoxKMXQZBVnkveLVBMflTHHKOdZuckyIOjqVcZ9qLGx33xrwoGqImFYy4z3gQO5f93wR3HCASYrKllofTSN739AKmeQ7BvBNUNeJ9wTfapu7AUP7qc96JOoEfIPsrSUNBp1B9ukzZSH0SDsnDvCw7Mk+YodYaC7DjuUtS/TUqph1iNKHSdkAUiRa3+oXgEsJBl2c8GflmyTK+fXSafSj+tZs3QjkEqVt3iccciGJwypVZe99BiatkUK17REaspySmlcmIBfCVNwVZMQzpRInJqdZSuhGl9uxM9KaF6ok/SFXj8AN36wn1BS47drXg1bCxpHkM6daQ2XXyAn8jHi8s2Nka5gJjinoLf2hg7vOZfuGpBfX/qR/x0HNsuMxch9GKLhfHzzRinXZtCZoVg4WEAQxBrTK8WHvufn1yYj/SnENgjGYyfyWbQxuaThf4eR8oR2wLHHLYI/Bl+BIP/74PRfwA=</xmldata>
-		</sshkeyfile>
-		<sshkeyfile>
-			<filename>ssh_host_rsa_key.pub</filename>
-			<xmldata>Fce3kptQAEDR3l+xPWOTU7EzJj6RQSBAdCAyIj5E+nqvb3PmQlj/XmD6JfwkkvaVSvj5IpT/KwueIP4oCZ4EOIfQpFQ/6v68DOUFcHUu/bq6dTlvDezS9YYV8e8V1Z9YXgf7TiyAhg0DPjc6SC7jLsV9zVSsYnsbTKTw4cmOGvMicyEiB2plSbNbsLlqcAx38+IsxD2HnCrXl1XYiMVe3Yz2aqmumfzpm0HrLdmYyXwZyudbxVacidqnU5HjaNAMOhPEcG8n7CHe7vnT8A5WA7cbllPN9RCtcAtJgmjAFgsgGsSxJSZ5gcF5K5EX957YVI8abc0pGPPawc3O7BHBoU8PKk7cpHee9gprlBegAEQaoll8knaYn4O97Vw0FLH6LmW33hm8p8Ea2e9qOwVJznGToPDaV52X2qZrI4AtpDry4GUO1hYTWTyexBf2KOOFk9pyCJQL1RKodnHokrItc27GOwLaZ51RfoxRnzEb2cAOrP6OH4tbyBhJqJOws6ByjaVZ/MTsavaUrViPRi0bRKmPneKuJ/3SM+gq9qk3Pl5xnpmGbhbUxWJlpU4he/pGNYUEm8tJ1KLtMUo4Es7ro+uTdZQJGdSGxCgfHDl4EFjVuaAjFS25YcLwpglPVX11ocYiBv0x9Car5g+QKBDNVD6Y8+A0vo0EoQIpDMJ+/Qx3VMhqLphdz89spGi2qPBIez/9CG4+3eWMbqumml9TGqcVnRu1x8/FR2rltS1K/amgnKkcE43gO7g8ldzfJSoF+/f31zKO69+p9IsBFn/qsS/+pMuU/voH</xmldata>
-		</sshkeyfile>
-		<sshkeyfile>
-			<filename>ssh_host_ed25519_key</filename>
-			<xmldata>nZDLboMwFET3fEX2UZQEcBKWGBtwCSbGpATvaqjy4JEmkAd8fetKXXTRTWcxutJcHY1mMvkSxB6ho2iDKef+aBOTVzvBowBnKpxo0oCVbOjw5syvYld2xQnbStADd1lv1Yllbd0Es38ElYUP5d2Q6/tOpBrrabJ9RurJgTcOV6bQubfhi2NXFo+q3X3gEDiW2YGZsIE5vjGxRIdBMQLUJi5aLvGTaeNf1P9CNVUa6V7W1UW5l9zVZ/QEpoRcTYutLtW0ImYbpeeARqbbA5QC4g+HRpDMWl8CPTac9PleMm0o18bRaOISNacFgE0b+aHq5zYvd2nEdu6JRKRgEBycpT6v1rXb5x6G9j7EkGW+9j0xpujv+T8B</xmldata>
-		</sshkeyfile>
-		<sshkeyfile>
-			<filename>ssh_host_ed25519_key.pub</filename>
-			<xmldata>Ky7O0E1NMTI1NbRUcAQCZ2O/qkRnw5woF09DvxBXU5CYp7upp0dVRl6UZ6SlT6G3UZCxc3hFanZgVbaPcaZxXlC2S16WmalTXrG/h69CUX5+iUNBWnBqXnGqXkZ+bqpeYlFBIhcA</xmldata>
-		</sshkeyfile>
-	</sshdata>
+	<wizardtemp>
+		<system>
+			<hostname>pfSense</hostname>
+			<domain>home.arpa</domain>
+		</system>
+	</wizardtemp>
+	<dyndnses>
+		<dyndns>
+			<type>noip-free</type>
+			<username><![CDATA[cales@custm.es]]></username>
+			<password><![CDATA[WC52V2pKbXNkM0tGIUcq]]></password>
+			<host>testcustm.sytes.net</host>
+			<domainname></domainname>
+			<mx></mx>
+			<enable></enable>
+			<interface>wan</interface>
+			<zoneid></zoneid>
+			<ttl></ttl>
+			<maxcacheage></maxcacheage>
+			<updateurl></updateurl>
+			<resultmatch></resultmatch>
+			<requestif>wan</requestif>
+			<descr><![CDATA[CUSTM DDNS]]></descr>
+			<id>0</id>
+		</dyndns>
+	</dyndnses>
+	<ovpnserver>
+		<step1>
+			<type>local</type>
+		</step1>
+		<step6>
+			<certca><![CDATA[CUSTMCA]]></certca>
+			<randomserial>on</randomserial>
+			<keylength>2048</keylength>
+			<lifetime>3650</lifetime>
+			<commonname>CUSTM</commonname>
+			<country>ES</country>
+			<state><![CDATA[ANDALUCIA]]></state>
+			<city><![CDATA[MALAGA]]></city>
+			<organization><![CDATA[CUSTM]]></organization>
+			<organizationalunit><![CDATA[RD]]></organizationalunit>
+			<uselist>on</uselist>
+		</step6>
+		<step9>
+			<authcertname>6788e6191ed43</authcertname>
+			<uselist>on</uselist>
+			<certname><![CDATA[customio]]></certname>
+			<keylength>2048</keylength>
+			<lifetime>398</lifetime>
+			<commonname>customio</commonname>
+			<country>ES</country>
+			<state><![CDATA[ANDALUCIA]]></state>
+			<city><![CDATA[MALAGA]]></city>
+			<organization><![CDATA[CUSTM]]></organization>
+			<organizationalunit><![CDATA[RD]]></organizationalunit>
+		</step9>
+		<step10>
+			<descr><![CDATA[CUTMVPN]]></descr>
+			<protocol>UDP4</protocol>
+			<interface>wan</interface>
+			<localport>1194</localport>
+			<tlsauth>on</tlsauth>
+			<gentlskey>on</gentlskey>
+			<dhkey>2048</dhkey>
+			<dataciphers>AES-256-GCM,AES-128-GCM,CHACHA20-POLY1305</dataciphers>
+			<dataciphersfallback>AES-256-CBC</dataciphersfallback>
+			<digest>SHA256</digest>
+			<engine>none</engine>
+			<rdrgw>on</rdrgw>
+			<localnet>192.168.1.137/32</localnet>
+			<concurrentcon>1</concurrentcon>
+			<allowcompression>no</allowcompression>
+			<tos>on</tos>
+			<dynip>on</dynip>
+			<topology>subnet</topology>
+			<nbttype>0</nbttype>
+			<tunnelnet>10.0.8.0/24</tunnelnet>
+		</step10>
+		<step11>
+			<ovpnrule>on</ovpnrule>
+			<ovpnallow>on</ovpnallow>
+		</step11>
+	</ovpnserver>
+	<ca>
+		<refid>67c040e7bc7b1</refid>
+		<descr><![CDATA[CUSTMCA]]></descr>
+		<randomserial>enabled</randomserial>
+		<crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVFVENDQXZtZ0F3SUJBZ0lJUVEvRlNPNW9kdmt3RFFZSktvWklodmNOQVFFTEJRQXdYekVPTUF3R0ExVUUKQXhNRlExVlRWRTB4Q3pBSkJnTlZCQVlUQWtWVE1SSXdFQVlEVlFRSUV3bEJUa1JCVEZWRFNVRXhEekFOQmdOVgpCQWNUQmsxQlRFRkhRVEVPTUF3R0ExVUVDaE1GUTFWVFZFMHhDekFKQmdOVkJBc1RBbEpFTUI0WERUSTFNREl5Ck56RXdNemt6TmxvWERUTTFNREl5TlRFd016a3pObG93WHpFT01Bd0dBMVVFQXhNRlExVlRWRTB4Q3pBSkJnTlYKQkFZVEFrVlRNUkl3RUFZRFZRUUlFd2xCVGtSQlRGVkRTVUV4RHpBTkJnTlZCQWNUQmsxQlRFRkhRVEVPTUF3RwpBMVVFQ2hNRlExVlRWRTB4Q3pBSkJnTlZCQXNUQWxKRU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBCk1JSUJDZ0tDQVFFQXNiRGEwcHFHRzJFVkdxdm1IOEU3MDBwZG02dTRtUkpTNEpJUVdnbGllNVdleHlOd00zd28KK0pHcjhyRFhZcE5pWDkxZUJOVHpLdWxtNEZXQ3hIc3FsN01BRXpnSFJJQnlLV0FvaWFmUWJsckhsR2d2Q0U0cgpHVHFqL2lnWGh2RE5FZGZPMFZCZVh3aXBYZk82ak82MWJnZm1mdjNxUDc4U01MMHkzOU5XeTBnZzRFQXRWVEphCnh0ZmtzQWRzR3RyWmEwbGFOMWFvbmRRTDc2YjArV25BOWRlS3VWVFFnb2UveWVHMk1YWWg3dUV6WTFoT25sWU0KekoybGZxU0Q2eGNMMmtXaWxDVGZUb080amd4NjFrbXM0VUNJcVduSDk2enV2Sk15TVREaytZa0lrVDlBdEg1MgozMFk1UUovb0dZaGorL2hZWjdxS0Q1NHMxd1ZIR3EwbFRRSURBUUFCbzRIUU1JSE5NQjBHQTFVZERnUVdCQlFmCkFiYlRlZXJWVnA0OTFjQ1R5a3RVZVgvcjFqQ0JrQVlEVlIwakJJR0lNSUdGZ0JRZkFiYlRlZXJWVnA0OTFjQ1QKeWt0VWVYL3IxcUZqcEdFd1h6RU9NQXdHQTFVRUF4TUZRMVZUVkUweEN6QUpCZ05WQkFZVEFrVlRNUkl3RUFZRApWUVFJRXdsQlRrUkJURlZEU1VFeER6QU5CZ05WQkFjVEJrMUJURUZIUVRFT01Bd0dBMVVFQ2hNRlExVlRWRTB4CkN6QUpCZ05WQkFzVEFsSkVnZ2hCRDhWSTdtaDIrVEFNQmdOVkhSTUVCVEFEQVFIL01Bc0dBMVVkRHdRRUF3SUIKQmpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWFtc3MzOFUzT01JVzVyNlV4NU96amR0ejcrVkU4bDZFU1JOWgpkTEtDcGlkSWpUdTk0UmRoeEJlVFJNSGFGQU5UR0pkeWRhb2VHQkFGakk5UlJtSUV1amdRUG93emxkVlkxSTdPCkd0bkRPWUJHemoxTEV5ZnNEa2dhcGdBZktVc0Z2YW5XQUxiZU15SlcrM0FEMWR5SXFrOEV5Vm00bFBvbEtOa1EKZFd0RDVvbFVCaEc2d2RpN0RhbXB5VDVjSFZxbVZrcTREV1pPUUlaeGxoNHF6RkhZY3R4dnNaTVBCbVBaODVMVQpXMFdPbERaRE9JYnpSYVlnQU1lMnJhTmFxVklaTExDeWpDUHhnelJjY1VOcUlVMkdiMmdtN0dSNjJ1VWFWZ2hiCmFhQzBWaG81OWZrL0Mwb1RSbjN6Yy9LM3VXcWIzcERWRERBeTMrd2lGOEtjNEF4Q2VBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</crt>
+		<prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQ3hzTnJTbW9ZYllSVWEKcStZZndUdlRTbDJicTdpWkVsTGdraEJhQ1dKN2xaN0hJM0F6ZkNqNGthdnlzTmRpazJKZjNWNEUxUE1xNldiZwpWWUxFZXlxWHN3QVRPQWRFZ0hJcFlDaUpwOUJ1V3NlVWFDOElUaXNaT3FQK0tCZUc4TTBSMTg3UlVGNWZDS2xkCjg3cU03clZ1QitaKy9lby92eEl3dlRMZjAxYkxTQ0RnUUMxVk1sckcxK1N3QjJ3YTJ0bHJTVm8zVnFpZDFBdnYKcHZUNWFjRDExNHE1Vk5DQ2g3L0o0Yll4ZGlIdTRUTmpXRTZlVmd6TW5hVitwSVByRnd2YVJhS1VKTjlPZzdpTwpESHJXU2F6aFFJaXBhY2Yzck82OGt6SXhNT1Q1aVFpUlAwQzBmbmJmUmpsQW4rZ1ppR1A3K0ZobnVvb1BuaXpYCkJVY2FyU1ZOQWdNQkFBRUNnZ0VBRjZidVliVXUzNnNiQjR0VkhPbjRRQ1k0Y3BXM2d5eVV1bzdHdlcxZFhnenEKN3gvdytmRnZkTExUUEFFOUVrS0RDRGFyb3FJRDRqVGlQRDgxb2xpd3NUT2k4V3YyVDdCM1FibXFlN1JLUXI0egpyYlgyZUxrSzlKZEJKLzRITDYrUzVHcWcvV3lndXk2b2VMaU9IdDlSYUIyR0dXWk1EWU10OVMzaC9UZ2c1L3J2CmQ0dHNoZXd6MFFxZEM5Njc1aHZnV2orMFZCL1ZXSlNPYWFxdXpldzN5RWVWTElERkRYd0RKVDFzT3FwWVBONzMKeDdqS1FpK210aS93TytzR2VwL3BNNUZKeHMvS3FLakdEb3F4ckRQeHBnV0ZTUC8zTnBaUjRPSXdoZzIzNkhMbQpnaUhVNVZ5Y01XRUZtcXVjMFRUb0IrLzBkcDF0MlZwYk10ekE4c1hXa3dLQmdRRGthK0NSUnB0dkwxRW9mN3VzCmdjdFVhNDVISml0cUxZL0wvMmRrLzF6Q0ZBQnZjOCt6RmZHL0V4M2xEL3BCNWM1bWh4Wnd4eDVLdzFnTVBXNloKN2V4WXdhZHBKVldZdE96dDVWM0xGWVVKRk5JN2wxVStoa1RUK0hYUU5CamFCUXZwVWlmNm1qT2J0dFV2a0pxaQpBZzhlZHJuSUhrdUtvaEZISmJEUmpDQ0Zod0tCZ1FESEpQc2tPaDRqeElmTnZQRnhYYk5CdS9SWFNYTW9QYVhJCkRhMzJoZmpRY1RNVURNZjJxbEE2azY0RGcreEY4cVdrcmh2T0s2MmsxM2VmQ2tScCtpbDhvVzMwYUhnTHJMSDkKTXJ1OVBaTEZTSXQ5eU05K2Z0RWJDZlRRaXVxSE93TkxGcVJpSXh4WFRuODk1emJQYS9SUC9LZGNkYkRISmc2MQpOT2Q1UU85eml3S0JnRWQ2YW4rTGRNQktNajlXR1VoV0pXWjVjY0JaOVdQNGRmTUVMVHF4bmprdFFTV2ZPL055CmZuK29YOFo2UlhteGkvRVJmTGcxMXdqV01BdEVmZ08xTEN4cURSVWVGYmIvaHRTNjNhcmJSUkllYmRzdjlBRG8KeTBqNWl3Um9DUTdRWFhYWnU2RHorQXBXSUVnT0hCVnVSNFRrNmlYeE5QcGcxTDlLMEJZQ24zcXBBb0dCQUpJSwpkN1pvZklQa2MyY1lnY09PWUkvN1EwUGoxSFNWU1FjOXFPN1o3czhGeE55V1J1cUltYzlyVDdpNlBVSktvTmowCjZlVTNPTjlqT0JGRTJVa1NzT3Y2QW9Xek94M3NwcGExWnVKdnpqdXBhTXAwd2wzVXFJcDRzYlZodW40emM4WFUKTS9iWUlzZVFCRllrUXBpNFpYRm5LbUR1MmhZaHZiVjd0NmkvU3hyakFvR0JBT1BYU1ljVFJlWnNsSEF0akxoNAo0eWQ4QzNycy9rVmZsUzVzeFAyeVFRaWVrZm9JRkhBSHliaDg3OUNpZm5RZVIwU0I0bU9HWUlEWlk0d3JHREcvCkFraEpWdXpJWkI5MmQ3NERZbzFtTnh4T1RWeWxTSy93RTh0ZHQ0ZUEyMVlSYitRTE1nRVJTZWNQTFBsdjhSdnkKUDBRUGYzMnFJUGtzTnJSZXIwQXpDWXNiCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K</prv>
+		<serial>1</serial>
+	</ca>
+	<virtualip>
+		<vip>
+			<interface>lo0</interface>
+			<descr><![CDATA[pfB DNSBL - DO NOT EDIT]]></descr>
+			<type>single</type>
+			<subnet_bits>32</subnet_bits>
+			<subnet>10.10.10.1</subnet>
+			<mode>ipalias</mode>
+		</vip>
+	</virtualip>
 </pfsense>
