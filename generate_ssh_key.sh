@@ -4,8 +4,8 @@
 SSH_KEY_DIR="$HOME/.ssh"
 
 # Obtener identificador único del dispositivo
-MAC1=$(ifconfig | grep -m 3 ether | awk '{print $2}')
-MAC2=$(ifconfig | grep -m 4 ether | tail -n1 | awk '{print $2}')
+MAC1=$(ifconfig | grep -m 1 ether | awk '{print $2}')
+MAC2=$(ifconfig | grep -m 2 ether | tail -n1 | awk '{print $2}')
 COMBINED_MAC="${MAC1}${MAC2}"
 DEVICE_ID=$(echo -n "$COMBINED_MAC" | md5)
 
