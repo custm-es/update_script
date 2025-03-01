@@ -27,7 +27,10 @@ fi
 log "Downloaded configuration file for $DEVICE_ID from $CONFIG_URL"
 
 # Step 2: Compare the current configuration with the new one
-if cmp -s $CURRENT_CONFIG $TEMP_FILE; then
+NEW_CHECKSUM=$(sha256sum $TEMP_FILE | awk '{print $1}')
+CURRENT_CHECKSUM=$(sha256sum $CURRENT_CONFIG | awk '{print $1}')
+
+if [ "$NEW_CHECKSUM" = "$CURRENT_CHECKSUM" ]; then
     log "The new configuration is identical to the current one. No changes applied."
     rm -f $TEMP_FILE
     exit 0
